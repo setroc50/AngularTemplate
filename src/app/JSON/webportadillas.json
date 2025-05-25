@@ -1,0 +1,247 @@
+[
+  {
+  "fields": 
+  [ 
+    { 
+      "colZize":12,
+      "type": "separator",
+      "style": "border-t border-gray-300 my-2 col-span-full",
+      "label": "Portadillas Internacional",
+      "key":"Separator"
+  
+    },
+
+    {
+      "colZize":6,
+      "label": "Inicio",
+      "type": "date",
+      "colspan": 2,
+      "gridCols": 6,
+      "key":"dateinicia"
+    }, 
+    {
+      "colZize":6,
+      "label": "Final",
+      "type": "date",
+      "colspan": 2,
+      "gridCols": 6,
+      "key":"dateend"
+    }, 
+    {
+      "colZize":12,
+      "label": "Titulo",
+      "type": "text",
+      "inputType": "text",  
+      "colspan": 2,
+      "gridCols": 6,
+      "validators": ["required"],
+      "required": true,
+      "key":"titulo"
+      
+    },
+    {
+      "colZize":6,
+      "label": "Descrtipcion",
+      "type": "textarea",
+
+      "colspan": 4,
+      "rowspan": 2,
+      "gridCols": 6,
+        "key":"descripcion"
+    },
+    
+    {
+      "colZize":12,
+      "label": "Orden",
+      "type": "text",
+      "inputType": "text",  
+      "colspan": 2,
+      "gridCols": 6,
+      "validators": ["required"],
+      "required": true,
+      "key":"ver"
+      
+    },
+    {"colZize":6,
+    "label": "Origen",
+    "type": "select",
+    "field": "Origen",
+     "colspan": 2,
+    "gridCols": 6,
+    "isAPI": false,
+    "options": [
+      { "name": "Todos",           "value": "AL" },
+      { "name": "Guatemala",       "value": "GT" },
+      { "name": "Colombia",        "value": "CL" },
+      { "name": "Internacionales", "value": "IN" },
+      { "name": "Costa Rica",      "value": "CX" },
+      { "name": "PANAMA",          "value": "PX" } 
+      
+    ],
+   "key":"origen"
+  },
+
+  {"colZize":6,
+  "label": "Origen",
+  "type": "select",
+  "field": "Origen",
+   "colspan": 2,
+  "gridCols": 6,
+  "isAPI": false,
+  "options": [
+    { "name": "Si","value": "SI" },
+    { "name": "No","value": "NO" }
+  ],
+ "key":"activo"
+},
+ 
+{"colZize":6,
+"label": "Encabezado",
+"type": "select",
+"field": "Origen",
+ "colspan": 2,
+"gridCols": 6,
+"isAPI": false,
+"options": [
+  { "name": "Si","value": "SI" },
+  { "name": "No","value": "NO" }
+],
+"key":"encabezado"
+},
+
+{"colZize":6,
+"label": "Comportamiento",
+"type": "select",
+"field": "Comportamiento",
+ "colspan": 2,
+"gridCols": 6,
+"isAPI": false,
+"options": [
+  { "name": "Misma pagina","value": "_parent" },
+  { "name": "Nueva pagina","value": "_blank" }
+], 
+"key":"encabezado"
+},
+
+{"colZize":6,
+"label": "Modo ",
+"type": "select",
+"field": "Modo",
+ "colspan": 2,
+"gridCols": 6,
+"isAPI": false,
+"options": [
+  { "name": "Tradicional","value": "0" },
+  { "name": "Akeneo","value": "1" },
+  { "name": "Link Especial","value": "1" }
+], 
+"key":"mode"
+},
+
+ 
+
+{"colZize":6,
+"label": "Necesita Login? ",
+"type": "select",
+"field": "Modo",
+ "colspan": 2,
+"gridCols": 6,
+"isAPI": false,
+"options": [
+  { "name": "NO","value": "0" },
+  { "name": "SI","value": "1" }
+  
+], 
+"key":"login"
+},
+{
+  "colZize":6,
+  "label": "Route",
+  "type": "text",
+  "disabledField":"mode",
+  "disabledValue":"0",
+  "colspan": 4,
+  "rowspan": 2,
+  "gridCols": 6,
+  "key":"route"
+},
+
+
+{
+  "colZize":6,
+  "label": "Descrtipcion",
+  "type": "textarea",
+ 
+
+  "colspan": 4,
+  "rowspan": 2,
+  "gridCols": 6,
+    "key":"articulos"
+}
+  ],
+  "services":
+  [
+    { 
+   
+    "create":
+    {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users",
+      "method": "POST"
+    },
+    "update":
+    {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users",
+      "method": "PUT"
+    },
+    "delete":
+    {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users",
+      "method": "DELETE"
+    },
+    "get":
+    {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users",
+      "method": "GET"
+    },
+    "getAll":
+    {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users",
+      "method": "GET"
+    },
+    "getById":   
+     {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users/:id",
+      "method": "GET"
+    },
+    "related":[
+ 
+ 
+    
+  
+  
+  ]
+   
+      
+
+ 
+
+}
+],
+"nameModel": "Uno De todo",
+"route": "uno-de-todo",
+"icon": "fa plus"
+  }
+
+  ]

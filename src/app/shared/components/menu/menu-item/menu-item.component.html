@@ -1,0 +1,67 @@
+<div>
+  <div
+    *ngIf="!item.route"
+    (click)="toggleSubmenu(); $event.stopPropagation()"
+    routerLinkActive="m-auto m-1 text-red-900 font-medium rounded-md"
+    class="group relative flex m-auto items-center justify-between p-2 text-gray-600 hover:bg-gray-700 hover:text-gray-100 m-1 rounded-lg cursor-pointer"
+  >
+    <div class="flex items-center">
+      <i *ngIf="item.icon" class="{{ item.icon }} mr-2">
+        <span
+  *ngIf="!menuService.showSideBar"
+    class="{{ expandIconClass }}   text-[8px] absolute bottom-2 right-2 transform translate-x-1/2 translate-y-1/2">
+</span>
+      </i>
+      @if(menuService.showSideBar) {
+      <span
+        class="block w-[140px] truncate whitespace-nowrap overflow-hidden"
+        >{{ item.name }}</span
+      >
+      }
+    </div>
+    @if (menuService.showSideBar && item.submenu) {
+    <i class="{{ expandIconClass }}"></i>
+    }
+
+    <div class="z-50 fixed h-[36px]" *ngIf="!menuService.showSideBar">
+      <span
+        class="bg-slate-700 text-white absolute w-auto min-w-max translate-y-[2px] scale-0 rounded-md p-2 text-xs font-bold shadow-md transition-all duration-200 group-hover:scale-100 ltr:origin-left ltr:translate-x-10 rtl:origin-right rtl:-translate-x-10"
+      >
+        {{ item.name }}
+      </span>
+    </div>
+  </div>
+
+  <a
+    *ngIf="item.route"
+    [routerLink]="item.route"
+    routerLinkActive="m-auto m-1 text-red-900 font-medium rounded-md"
+    class="group relative flex items-center p-2 text-gray-700 hover:bg-gray-700 hover:text-gray-100 m-1 rounded-lg"
+  >
+    <i *ngIf="item.icon" class="{{ item.icon }} mr-2"></i>
+    @if (menuService.showSideBar) {
+    <span class="block w-[140px] truncate whitespace-nowrap overflow-hidden">{{
+      item.name
+    }}</span>
+    }
+
+    <div class="z-50 fixed h-[36px]" *ngIf="!menuService.showSideBar">
+      <span
+        class="bg-slate-700 text-white absolute w-auto min-w-max translate-y-[2px] scale-0 rounded-md p-2 text-xs font-bold shadow-md transition-all duration-200 group-hover:scale-100 ltr:origin-left ltr:translate-x-10 rtl:origin-right rtl:-translate-x-10"
+      >
+        {{ item.name }}
+      </span>
+    </div>
+  </a>
+
+  <ul *ngIf="item.submenu && item.expanded"
+  class="ml-1 overflow-hidden rounded-md"
+
+
+
+  >
+    <li *ngFor="let subItem of item.submenu">
+      <app-menu-item [item]="subItem"></app-menu-item>
+    </li>
+  </ul>
+</div>

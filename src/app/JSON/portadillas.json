@@ -1,0 +1,399 @@
+[
+  {
+  "fields": 
+  [
+
+    
+
+    { 
+      "colZize":6,
+      "type": "separator",
+      "style": "border-t border-gray-300 my-2 col-span-full",
+      "label": "PRIMER SEPARADOR",
+      "key":"Separator"
+  
+    },
+
+    {"colZize":6,
+    "type": "radio",
+    "label": "Opción Preferida",
+    "table": "preferences",
+    "field": "preferredOption",
+    "position": { "x": 1, "y": 7 },
+    "colspan": 3,
+    "gridCols": 6,
+    "options": [
+      { "name": "Opción A", "value": "a" ,
+      "key":"radius"},
+      { "name": "Opción B", "value": "b",
+      "key":"radius" }
+    ],
+      "key":"optionForCountries"
+  },
+    {
+      "colZize":6,
+      "type": "label",
+      "label": "Primera Opcion",
+      "style": "text-lg font-medium mb-2 col-span-full"
+      ,
+        "key":"label1"
+    },
+
+    {"colZize":6,
+    "label": "Paises",
+    "type": "select",
+    "field": "countries",
+     "colspan": 2,
+    "gridCols": 6,
+    "isAPI": true,
+    "options": [
+      { "label": "Masculino", "value": "male" },
+      { "label": "Femenino", "value": "female" },
+      { "label": "Otro", "value": "other" }
+    ]
+    ,
+      "key":"selectCountries"
+  },
+
+
+
+  
+  { 
+    "colZize":12,
+    "type": "separator",
+    "style": "border-t border-gray-300 my-2 col-span-full",
+    "label": "Información del Usuario",
+    "key":"Separator"
+
+  },
+  {  "colZize": 6,
+    "type": "multipleFileDragGeneric",
+    "key": "documentos",
+    "label": "Documentos",
+    "accept": ".docx,.pdf"
+  },
+  {
+    "colZize": 6,
+    "label": "Seleccionar y Soltar Imágenes",
+    "type": "multipleImageDrag",
+    "key": "multipleImagesDrag",
+    "accept": "image/png, image/jpeg"
+  },
+  {
+    "colZize": 12,
+    "label": "Imagen de Perfil",
+    "type": "image",
+    "key": "profileImage",
+    "accept": "image/png, image/jpeg"  
+  },
+  {
+    "colZize":12,
+    "label": "Nombre",
+    "type": "text",
+    "inputType": "text",
+    "table": "users",
+    "field": "firstName",
+    "position": { "x": 1, "y": 1 },
+    "colspan": 2,
+    "gridCols": 6,
+    "validators": ["required"],
+    "required": true,
+      "key":"text1"
+    
+  },
+  { 
+    "colZize":12,
+    "type": "separator",
+    "style": "border-t border-gray-300 my-2 col-span-full",
+    "label": "Información del Usuario",
+    "key":"Separator"
+
+  },
+    {
+      "colZize":6,
+      "label": "Apellido",
+      "type": "text",
+      "inputType": "text",
+      "table": "users",
+      "field": "lastName",
+      "position": { "x": 3, "y": 1 },
+      "colspan": 2,
+      "gridCols": 6,
+        "key":"txApellido"
+    },
+    {
+      "colZize":6,
+      "label": "Nombre",
+      "type": "text",
+      "inputType": "text",
+      "table": "users",
+      "field": "firstName",
+      "position": { "x": 1, "y": 1 },
+      "colspan": 2,
+      "gridCols": 6,
+      "validators": ["required"],
+      "required": true,
+        "key":"txNombre"
+      
+    },
+    {
+      "colZize":6,
+      "label": "Apodo",
+      "type": "text",
+      "inputType": "text",
+      "table": "users",
+      "field": "lastName",
+      "position": { "x": 3, "y": 1 },
+      "colspan": 2,
+      "gridCols": 6,
+        "key":"text3"
+    },
+    { 
+      "colZize":12,
+      "type": "separator",
+      "style": "border-t border-gray-300 my-2 col-span-full",
+      "label": "Información del Usuario",
+      "key":"Separator"
+
+    },
+    {
+      "colZize":12,
+      "label": "Correo Electrónico",
+      "type": "email",
+      "inputType": "email",
+      "table": "users",
+      "field": "email",
+      "position": { "x": 1, "y": 2 },
+      "colspan": 3,
+      "gridCols": 6,
+      "validators": ["required", "email"],
+        "key":"text4"
+    },
+    {
+      "colZize":6,
+      "label": "Fecha de Nacimiento",
+      "type": "date",
+      "table": "users",
+      "field": "birthDate",
+      "position": { "x": 4, "y": 2 },
+      "colspan": 2,
+      "gridCols": 6,
+        "key":"date1"
+    },
+    {
+      "colZize":12,
+      "type": "separator",
+      "style": "border-t border-gray-300 my-4 col-span-full"
+      ,
+        "label": "Datos Personales",
+        "key":"separator2"
+    },
+    {
+      "colZize":6,
+      "type": "label",
+      "label": "Label1",
+      "style": "text-lg font-medium mb-2 col-span-full"
+      ,
+        "key":"label1"
+    },
+    { 
+      "colZize":12,
+      "type": "separator",
+      "style": "border-t border-gray-300 my-2 col-span-full",
+      "label": "Información del Usuario",
+      "key":"Separator"
+
+    },
+    {
+      "colZize":6,
+      "label": "Número de Teléfono",
+      "type": "number",
+      "table": "users",
+      "field": "phoneNumber",
+      "position": { "x": 1, "y": 3 },
+      "colspan": 2,
+      "gridCols": 6
+      ,
+        "key":"ntelefono"
+    },
+    {
+      "colZize":6,
+      "label": "Dirección",
+      "type": "textarea",
+      "table": "users",
+      "field": "address",
+      "position": { "x": 1, "y": 4 },
+      "colspan": 4,
+      "rowspan": 2,
+      "gridCols": 6,
+        "key":"direccion"
+    },
+    {
+      "colZize":6,
+      "label": "¿Acepta los términos?",
+      "type": "checkbox",
+      "table": "users",
+      "field": "termsAccepted",
+      "position": { "x": 5, "y": 4 },
+      "colspan": 1,
+      "gridCols": 6
+      ,
+        "key":"terminos"
+    },
+    { 
+      "colZize":12,
+      "type": "separator",
+      "style": "border-t border-gray-300 my-2 col-span-full",
+      "label": "Otro Separado",
+      "key":"Separator"
+
+    },
+    {"colZize":6,
+      "label": "Género",
+      "type": "Nullselect",
+      "table": "users",
+      "field": "gender",
+      "position": { "x": 3, "y": 3 },
+      "colspan": 2,
+      "gridCols": 6,
+      "options": [
+        { "label": "Masculino", "value": "male" },
+        { "label": "Femenino", "value": "female" },
+        { "label": "Otro", "value": "other" }
+      ]
+      ,
+        "key":"gender"
+    },
+
+    
+    {"colZize":6,
+      "label": "Notificaciones",
+      "type": "toggle",
+      "table": "users",
+      "field": "notificationsEnabled",
+      "position": { "x": 5, "y": 5 },
+      "colspan": 1,
+      "gridCols": 6
+      ,
+        "key":"toggle"
+    },
+    {"colZize":6,
+      "label": "Rango",
+      "type": "range",
+      "table": "settings",
+      "field": "volume",
+      "position": { "x": 1, "y": 6 },
+      "colspan": 3,
+      "gridCols": 6,
+      "min": 0,
+      "max": 100,
+      "step": 10
+      ,
+        "key":"rango"
+    },
+    {"colZize":6,
+      "label": "Color Favorito",
+      "type": "color",
+      "table": "settings",
+      "field": "favoriteColor",
+      "position": { "x": 4, "y": 6 },
+      "colspan": 2,
+      "gridCols": 6
+      ,
+        "key":"color"
+    },
+    {"colZize":6,
+      "type": "Testradio",
+      "label": "Opción Preferida",
+      "table": "preferences",
+      "field": "preferredOption",
+      "position": { "x": 1, "y": 7 },
+      "colspan": 3,
+      "gridCols": 6,
+      "options": [
+        { "label": "Opción A", "value": "a" ,
+        "key":"radius"},
+        { "label": "Opción B", "value": "b",
+        "key":"radius" }
+      ],
+        "key":"radius"
+    }
+  ],
+  "services":
+  [
+    { 
+   
+    "create":
+    {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users",
+      "method": "POST"
+    },
+    "update":
+    {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users",
+      "method": "PUT"
+    },
+    "delete":
+    {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users",
+      "method": "DELETE"
+    },
+    "get":
+    {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users",
+      "method": "GET"
+    },
+    "getAll":
+    {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users",
+      "method": "GET"
+    },
+    "getById":   
+     {
+      "principal": true,
+      "name": "userService",
+      "url": "/api/users/:id",
+      "method": "GET"
+    },
+    "related":[
+    { 
+      "key": "selectCountries",
+      "name": "userService",
+      "url": "http://localhost:4202/api/v1/template/select",
+      "method": "GET"
+    },
+    { 
+      "key": "optionForCountries",
+      "name": "userService",
+      "url": "http://localhost:4202/api/v1/template/select",
+      "method": "GET"
+    }
+ 
+ 
+    
+  
+  
+  ]
+   
+      
+
+ 
+
+}
+],
+"nameModel": "Uno De todo",
+"route": "uno-de-todo",
+"icon": "fa plus"
+  }
+
+  ]

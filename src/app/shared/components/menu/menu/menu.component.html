@@ -1,0 +1,20 @@
+
+  <ul class="flex flex-col pt-4">
+    <!-- List items -->
+
+
+     <li *ngFor="let item of menuItems()">
+        <app-menu-item [item]="item" (toggleSubmenuEvent)="toggleSubmenu(item)"></app-menu-item>
+      </li>
+  </ul>
+
+
+
+
+<!-- <div class=" w-64    flex flex-col">
+  <nav class="flex-1">
+    <ul>
+
+    </ul>
+  </nav>
+</div> -->

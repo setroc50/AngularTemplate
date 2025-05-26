@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fade-in-up 0.3s ease-out;
+  }
+}
 
 
 /** Plugins **/
@@ -27,6 +32,43 @@
   --color-foreground: var(--foreground);
 
   --color-primary: var(--primary);
+
+
+    --color-backgroundTemplate:  var(--backgroundTemplate);
+    --color-defaultTextColor:  var(--defaultTextColor);
+
+
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground:  var(--secondary-foreground);
+
+    --color-accent:  var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-neutral: var(--neutral);
+    --color-neutral-foreground: var(--neutral-foreground);
+
+    --color-info:  var(--info);
+    --color-info-foreground: var(--info-foreground);
+
+    --color-success:  var(--success);
+    --color-info-foreground:  var(--info-foreground);
+
+    --color-warning:  var(--warning);
+    --color-warning-foreground:  var(--warning-foreground);
+
+    --color-error:  var(--error);
+    --color-error-foreground:  var(--error-foreground);
+
+
+
+
+
+
+
+
+
+
   --color-primary-foreground: var(--primary-foreground);
 
   --color-destructive: var(--destructive);
@@ -154,17 +196,45 @@
 
 @layer base {
   :root {
+    --card: #F1F5F9;
     --background: #FFFFFF;
     --foreground: #0C1420;
-    --card: #F1F5F9;
-    --card-foreground: #000000;
-    --primary: #E11D48;
-    --primary-foreground: #FFFFFF;
-    --muted: #CFD9E5;
     --muted-foreground: #64748B;
-    --destructive: #CC0033;
+    --card-foreground: #000000;
+    --muted: #CFD9E5;
     --destructive-foreground: #FAFAFA;
+    --destructive: #CC0033;
     --border: #E2E8F0;
+
+    --defaultTextColor:#4A5565;
+    --backgroundTemplate: #ecedf0;
+
+    --primary: #EA2A27;
+    --primary-foreground: #374153;
+
+    --secondary: #FFDE1B;
+    --secondary-foreground: #042F4A;
+
+    --accent: #1345E3;
+    --accent-foreground: #FFFFFF;
+
+    --neutral: #43546A;
+    --neutral-foreground: #FFFFFF;
+
+    --info: #0CB7D9;
+    --info-foreground: #FFFFFF;
+
+    --success: #159789;
+    --info-foreground: #FFFFFF;
+
+    --warning: #FA9600;
+    --warning-foreground: #FFFFFF;
+
+    --error: #C4225A;
+    --error-foreground: #FFFFFF;
+
+
+
   }
 
   .dark {
@@ -175,6 +245,9 @@
     --muted: #262626;
     --muted-foreground: #A3A3A3;
     --border: #262626;
+    --backgroundTemplate: #121212;
+       --defaultTextColor:#F2F2F2;
+
   }
 
   :root[data-theme='violet'] {

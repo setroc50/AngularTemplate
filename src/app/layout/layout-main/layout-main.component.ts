@@ -6,11 +6,12 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
  import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
+import { ThemeToggleComponent } from '../../shared/components/theme-toggle/theme-toggle';
 
 @Component({
   selector: 'app-layout-main',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, SidebarComponent],
+  imports: [RouterOutlet, CommonModule, SidebarComponent,ThemeToggleComponent],
   templateUrl: './layout-main.component.html',
   styleUrls: ['./layout-main.component.css']
 })

@@ -2,8 +2,8 @@
   <div
     *ngIf="!item.route"
     (click)="toggleSubmenu(); $event.stopPropagation()"
-    routerLinkActive="m-auto m-1 text-red-900 font-medium rounded-md"
-    class="group relative flex m-auto items-center justify-between p-2 text-gray-600 hover:bg-gray-700 hover:text-gray-100 m-1 rounded-lg cursor-pointer"
+    routerLinkActive="m-auto m-1 text-primary font-medium rounded-md"
+    class="group relative flex m-auto items-center justify-between p-2 text-defaultTextColor hover:bg-defaultTextColor hover:text-background m-1 rounded-lg cursor-pointer"
   >
     <div class="flex items-center">
       <i *ngIf="item.icon" class="{{ item.icon }} mr-2">
@@ -35,8 +35,8 @@
   <a
     *ngIf="item.route"
     [routerLink]="item.route"
-    routerLinkActive="m-auto m-1 text-red-900 font-medium rounded-md"
-    class="group relative flex items-center p-2 text-gray-700 hover:bg-gray-700 hover:text-gray-100 m-1 rounded-lg"
+    routerLinkActive="m-auto m-1 text-primary font-medium rounded-md"
+    class="group relative flex items-center p-2 text-defaultTextColor hover:bg-defaultTextColor hover:text-background m-1 rounded-lg"
   >
     <i *ngIf="item.icon" class="{{ item.icon }} mr-2"></i>
     @if (menuService.showSideBar) {
@@ -60,7 +60,7 @@
 
 
   >
-    <li *ngFor="let subItem of item.submenu">
+    <li *ngFor="let subItem of item.submenu" class="animate-fade-in-up">
       <app-menu-item [item]="subItem"></app-menu-item>
     </li>
   </ul>

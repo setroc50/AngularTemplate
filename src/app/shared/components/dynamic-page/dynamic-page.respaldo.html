@@ -1,0 +1,52 @@
+
+    <div class="-mt-6 -ml-6 -mr-6 sticky top-0 bg-gray-400 z-10">
+      <!--  NAVBAR -->
+      <div
+        class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-300 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
+      >
+        {{ operation | titlecase }}
+
+        <!-- Separator -->
+
+        <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+          <div class="grid flex-1 grid-cols-1"></div>
+          <div></div>
+
+          <div class="flex items-center gap-x-4 lg:gap-x-6">
+            <!-- Separator -->
+            <div
+              class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
+              aria-hidden="true"
+            ></div>
+
+            <!-- Buttons -->
+            <div class="relative flex space">
+              <button
+                type="button"
+                (click)="closeForm()"
+                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2"
+              >
+                Cancelar
+              </button>
+
+              <div style="width: 10px"></div>
+              <button
+                type="submit"
+                class="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                {{ operation | titlecase }}
+              </button>
+            </div>
+
+            <!-- Separator -->
+            <div
+              class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
+              aria-hidden="true"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pt-3"></div>
+
+    <!-- #############################  -->

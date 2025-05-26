@@ -1,558 +1,540 @@
- 
-
- 
- 
-  <div
-    class="bg-white rounded-lg shadow-xl min-w-12/12 max-w-md h-[calc(93vh-4rem)] max-h-md overflow-y-auto pl-6 pr-6 relative "  (click)="$event.stopPropagation()"
-  >
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
-      <div class="-mt-6 -ml-6 -mr-6 sticky top-0 bg-gray-400 z-10">
 
 
-<!--  NAVBAR -->
-        <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-300 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
-   
-          {{ operation | titlecase }}
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- -->
 
-          <!-- Separator -->
-          
-    
-          <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-              <div class="grid flex-1 grid-cols-1"  ></div>
-              <div>
-                
-              </div>
-    
-            <div class="flex items-center gap-x-4 lg:gap-x-6">
-           
-    
-              <!-- Separator -->
-              <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true"></div>
-    
-              <!-- Buttons -->
-              <div class="relative flex space">
-          
-                <button
-                type="button"
-                (click)="closeForm()"
-                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2"
-              >
-                Cancelar
-              </button>
+    <div class="grid grid-cols-12 gap-5 p-4">
 
-                <div style="width: 10px;"></div>
-              <button
-                type="submit"
-                class="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                {{ operation | titlecase }}
-              </button>
-           
-            
-              </div>
 
-              <!-- Separator -->
-              <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true"></div>
-    
-            </div>
-          </div>
-        </div>
 
-      </div>
-      <div class="pt-3">
+      <ng-container *ngFor="let element of formConfig">
 
-      </div>
+        <div [ngClass]="'md:col-span-12'">
+
+
+        <!-- AQUI DIARIO HAY PROBLEMA CON ESTE SPAN
+
+          resources[element.key].data"  //DATOS DESDE LOS RESOURCES, PARA EL DATA DE TABLA O LO QUE SE NECESITE
+
+          -->
+
+          @let separatorAndLabelResult = (element.type?.includes('separator')
+          || element.type?.includes('label'));
 
 
 
 
-<!--
-#############################
--->
 
-<div class="grid grid-cols-12 gap-5 p-4">
+              <ng-container [ngSwitch]="element.type">
 
-  <div [ngClass]="'col-span-12  md:col-span-12'" >
-<app-table  
-[columns]="columns"
-[single]="false" 
-[identifier]="'id'" 
-[data]="data"
-(selectedItemsChange)="selectedItems = $event"
->
- 
-<ng-template let-row let-id="identifier">
-  
-  <div class=" flex space-x-3">
- 
- 
- 
+          <div *ngSwitchCase="'table'">
 
-</div>
- 
+          <app-table
+          [name]="element.label ||''"
+          [columns]="element.columns||[]"
+          [single]="element.single||false"
+          [identifier]="element.identifier||'id'"
+          [data]="resources[element.key].response"
 
- 
-  </ng-template>
+          (selectedItemsChange)="resources[element.key].selectedItems = $event"
+        >
+          <ng-template let-row let-id="identifier">
+            <div class="flex space-x-3"></div>
+          </ng-template>
+        </app-table>
 
-
-
-</app-table>
-</div>
-
-<!--
-#############################
--->
-
-
-      
-
-        <ng-container *ngFor="let element of formConfig"  >
-            <div [ngClass]="'col-span-12  md:col-span-'+(element.colZize||6)" >
-     <!-- AQUI DIARIO HAY PROBLEMA CON ESTE SPAN -->
-
-          <div class="grid grid-cols-12  "> 
-
-            @let separatorAndLabelResult = (element.type?.includes('separator') || element.type?.includes('label'));
-
-             <div  [ngClass]="separatorAndLabelResult ? 'col-span-0' : 'col-span-12 lg:col-span-5'"   >
-
-            <label *ngIf="!separatorAndLabelResult">
-
-        
-              {{ element.label }}
-            </label>
-
-          </div>
-<div  [ngClass]="separatorAndLabelResult ? 'col-span-12' : 'col-span-12 lg:col-span-7  '" >
-                 
-
-            <ng-container [ngSwitch]="element.type">
-
-              <div *ngSwitchCase="'multipleFileDragGeneric'">
-                <label
-                  [for]="element.key"
-                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                >
-                  {{ element.label }}
-                </label>
-                <div
-                  #dropArea
-                  (drop)="handleGenericFileDrop($event, element.key)"
-                  (dragover)="handleDragOver($event)"
-                  style="cursor: pointer; border: 2px dashed gray; padding: 20px; text-align: center;"
-                >
-                  <p class="text-gray-500 text-sm">Arrastra y suelta los archivos aquí</p>
-                  <p class="text-gray-500 text-xs mt-2">o</p>
-                  <button
-                    type="button"
-                    (click)="multipleGenericFileInputDrag.click()"
-                    class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded shadow"
-                  >
-                    Seleccionar archivos
-                  </button>
+{{resources[element.key].selectedItems |json}}
                 </div>
-                <input
-                  #multipleGenericFileInputDrag
-                  type="file"
-                  [id]="element.key"
-                  (change)="onMultipleGenericFileChange($event, element.key)"
-                  [accept]="element.accept || '.docx,.xlsx,.pdf'"
-                  multiple
-                  class="hidden"
-                />
-              
-                @let files = genericFileNames[element.key]?.length || 0;
-              
-                <div *ngIf="files > 0" class="mt-2 grid grid-cols-3 gap-2">
-                  <div
-                    *ngFor="let fileName of genericFileNames[element.key]; let i = index"
-                    class="relative cursor-move flex flex-col items-center justify-center border rounded p-2"
-                    draggable="true"
-                    (dragstart)="dragGenericStart(element.key, i)"
-                    (dragover)="dragGenericOver(element.key, i, $event)"
-                    (drop)="dropGeneric(element.key, i)"
+
+
+
+                <div *ngSwitchCase="'multipleFileDragGeneric'">
+                  <label
+                    [for]="element.key"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
-                    <img src="assets/file.png" alt="Archivo" style="max-width: 80%; height: auto;">
-                    <span class="text-xs mt-1 text-center">{{ fileName }}</span>
+                    {{ element.label }}
+                  </label>
+                  <div
+                    #dropArea
+                    (drop)="handleGenericFileDrop($event, element.key)"
+                    (dragover)="handleDragOver($event)"
+                    style="
+                      cursor: pointer;
+                      border: 2px dashed gray;
+                      padding: 20px;
+                      text-align: center;
+                    "
+                  >
+                    <p class="text-gray-500 text-sm">
+                      Arrastra y suelta los archivos aquí
+                    </p>
+                    <p class="text-gray-500 text-xs mt-2">o</p>
                     <button
                       type="button"
-                      (click)="removeGenericFile(element.key, i)"
-                      class="absolute top-0 right-0 bg-red-500 hover:bg-red-700 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center focus:outline-none"
-                      style="transform: translate(25%, -25%);"
+                      (click)="multipleGenericFileInputDrag.click()"
+                      class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded shadow"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
+                      Seleccionar archivos
                     </button>
                   </div>
-                </div>
-
- 
-                @let lengthFiles = genericFileNames[element.key]?.length || 0;
-                
-                <p class="text-xs text-gray-500 mt-1" *ngIf="lengthFiles > 0">
-                  Archivos seleccionados: {{ genericFileNames[element.key].join(', ') }}
-                </p>
-              </div>
-     
-              
-              <div *ngSwitchCase="'multipleImageDrag'">
-                <label
-                  [for]="element.key"
-                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                >
-                  {{ element.label }}
-                </label>
-                <div
-                  #dropArea
-                  (drop)="handleDropAreaDrop($event, element.key)"
-                  (dragover)="handleDragOver($event)"
-                  style="cursor: pointer; border: 2px dashed gray; padding: 20px; text-align: center;"
-                >
-                  <p class="text-gray-500 text-sm">Arrastra y suelta las imágenes aquí</p>
-                  <p class="text-gray-500 text-xs mt-2">o</p>
-                  <button
-                    type="button"
-                    (click)="multipleFileInputDrag.click()"
-                    class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded shadow"
-                  >
-                    Seleccionar archivos
-                  </button>
-                </div>
-                <input
-                  #multipleFileInputDrag
-                  type="file"
-                  [id]="element.key"
-                  (change)="onMultipleFileChange($event, element.key)"
-                  [accept]="element.accept || 'image/*'"
-                  multiple
-                  class="hidden"
-                />
-              
-                @let images = imagePreviews[element.key]?.length || 0;
-              
-                <div *ngIf="images > 0" class="mt-2 grid grid-cols-3 gap-2">
-                  <div
-                    *ngFor="let preview of imagePreviews[element.key]; let i = index"
-                    class="relative cursor-move"
-                    draggable="true"
-                    (dragstart)="dragStart(element.key, i)"
-                    (dragover)="dragOver(element.key, i, $event)"
-                    (drop)="drop(element.key, i)"
-                  >
-                    <img [src]="preview" alt="Imagen seleccionada" style="max-width: 100%; height: auto;">
-                    <button
-                      type="button"
-                      (click)="removeImage(element.key, i)"
-                      class="absolute top-0 right-0 bg-red-500 hover:bg-red-700 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center focus:outline-none"
-                      style="transform: translate(25%, -25%);"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-                <p class="text-xs text-gray-500 mt-1" *ngIf="getMultipleFileNames(element.key).length > 0">
-                  Archivos seleccionados: {{ getMultipleFileNames(element.key).join(', ') }}
-                </p>
-              </div>
-
-              <div *ngSwitchCase="'image'">
-                <label
-                  [for]="element.key"
-                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"  >
-
-                  {{ element.label }}
-
-                </label>
-                <input
-                  #fileInput
-                  type="file"
-                  [id]="element.key"
-                  (change)="onFileChange($event, element.key)"
-                  [accept]="element.accept || 'image/*'"
-                  class="hidden"
-                />
-                <div
-                  (click)="fileInput.click()"
-                  style="cursor: pointer; border: 1px dashed gray; padding: 10px; max-width: 150px; height: auto;"
-                >
-                  <img
-                    [src]="form.get(element.key)?.value || '/assets/emptyImage.jpg'"
-                    alt="Imagen de Perfil"
-                    style="max-width: 100%; display: block;"
-                    alt="Puedes cambiar haciendo click"
+                  <input
+                    #multipleGenericFileInputDrag
+                    type="file"
+                    [id]="element.key"
+                    (change)="onMultipleGenericFileChange($event, element.key)"
+                    [accept]="element.accept || '.docx,.xlsx,.pdf'"
+                    multiple
+                    class="hidden"
                   />
-                  <p class="text-center text-xs text-gray-500 mt-1">
-                    {{ getFileName(element.key) || 'Seleccionar imagen' }}
+
+                  @let files = genericFileNames[element.key]?.length || 0;
+
+                  <div *ngIf="files > 0" class="mt-2 grid grid-cols-3 gap-2">
+                    <div
+                      *ngFor="
+                        let fileName of genericFileNames[element.key];
+                        let i = index
+                      "
+                      class="relative cursor-move flex flex-col items-center justify-center border rounded p-2"
+                      draggable="true"
+                      (dragstart)="dragGenericStart(element.key, i)"
+                      (dragover)="dragGenericOver(element.key, i, $event)"
+                      (drop)="dropGeneric(element.key, i)"
+                    >
+                      <img
+                        src="assets/file.png"
+                        alt="Archivo"
+                        style="max-width: 80%; height: auto"
+                      />
+                      <span class="text-xs mt-1 text-center">{{
+                        fileName
+                      }}</span>
+                      <button
+                        type="button"
+                        (click)="removeGenericFile(element.key, i)"
+                        class="absolute top-0 right-0 bg-red-500 hover:bg-red-700 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center focus:outline-none"
+                        style="transform: translate(25%, -25%)"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-3 w-3"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  @let lengthFiles = genericFileNames[element.key]?.length || 0;
+
+                  <p class="text-xs text-gray-500 mt-1" *ngIf="lengthFiles > 0">
+                    Archivos seleccionados:
+                    {{ genericFileNames[element.key].join(", ") }}
                   </p>
                 </div>
-              </div>
 
-
-           
-              <label  *ngSwitchCase="'label'">
-
-        
-                {{ element.label }}
-              </label>
-
-              <div *ngSwitchCase="'separator'">
-                <!--     
-                todo: Quitar labels de separators el que esta atras 
-                -->
-                <div class="relative flex items-center justify-center w-full">
-                  <div
-                    class="border-b border-gray-400 w-full absolute top-1/2 transform -translate-y-1/2"
-                  ></div>
-                  <span class="px-2 text-sm relative bg-white">
+                <div *ngSwitchCase="'multipleImageDrag'">
+                  <label
+                    [for]="element.key"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
                     {{ element.label }}
-                  </span>
+                  </label>
+                  <div
+                    #dropArea
+                    (drop)="handleDropAreaDrop($event, element.key)"
+                    (dragover)="handleDragOver($event)"
+                    style="
+                      cursor: pointer;
+                      border: 2px dashed gray;
+                      padding: 20px;
+                      text-align: center;
+                    "
+                  >
+                    <p class="text-gray-500 text-sm">
+                      Arrastra y suelta las imágenes aquí
+                    </p>
+                    <p class="text-gray-500 text-xs mt-2">o</p>
+                    <button
+                      type="button"
+                      (click)="multipleFileInputDrag.click()"
+                      class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded shadow"
+                    >
+                      Seleccionar archivos
+                    </button>
+                  </div>
+                  <input
+                    #multipleFileInputDrag
+                    type="file"
+                    [id]="element.key"
+                    (change)="onMultipleFileChange($event, element.key)"
+                    [accept]="element.accept || 'image/*'"
+                    multiple
+                    class="hidden"
+                  />
+
+                  @let images = imagePreviews[element.key]?.length || 0;
+
+                  <div *ngIf="images > 0" class="mt-2 grid grid-cols-3 gap-2">
+                    <div
+                      *ngFor="
+                        let preview of imagePreviews[element.key];
+                        let i = index
+                      "
+                      class="relative cursor-move"
+                      draggable="true"
+                      (dragstart)="dragStart(element.key, i)"
+                      (dragover)="dragOver(element.key, i, $event)"
+                      (drop)="drop(element.key, i)"
+                    >
+                      <img
+                        [src]="preview"
+                        alt="Imagen seleccionada"
+                        style="max-width: 100%; height: auto"
+                      />
+                      <button
+                        type="button"
+                        (click)="removeImage(element.key, i)"
+                        class="absolute top-0 right-0 bg-red-500 hover:bg-red-700 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center focus:outline-none"
+                        style="transform: translate(25%, -25%)"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-3 w-3"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <p
+                    class="text-xs text-gray-500 mt-1"
+                    *ngIf="getMultipleFileNames(element.key).length > 0"
+                  >
+                    Archivos seleccionados:
+                    {{ getMultipleFileNames(element.key).join(", ") }}
+                  </p>
                 </div>
-              </div>
-            
 
-              <div *ngSwitchCase="'radio'">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ element.label }}</label>
-                <div class="mt-2 space-y-2">
+                <div *ngSwitchCase="'image'">
+                  <label
+                    [for]="element.key"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    {{ element.label }}
+                  </label>
+                  <input
+                    #fileInput
+                    type="file"
+                    [id]="element.key"
+                    (change)="onFileChange($event, element.key)"
+                    [accept]="element.accept || 'image/*'"
+                    class="hidden"
+                  />
+                  <div
+                    (click)="fileInput.click()"
+                    style="
+                      cursor: pointer;
+                      border: 1px dashed gray;
+                      padding: 10px;
+                      max-width: 150px;
+                      height: auto;
+                    "
+                  >
+                    <img
+                      [src]="
+                        form.get(element.key)?.value || '/assets/emptyImage.jpg'
+                      "
+                      alt="Imagen de Perfil"
+                      style="max-width: 100%; display: block"
+                      alt="Puedes cambiar haciendo click"
+                    />
+                    <p class="text-center text-xs text-gray-500 mt-1">
+                      {{ getFileName(element.key) || "Seleccionar imagen" }}
+                    </p>
+                  </div>
+                </div>
 
+                <label *ngSwitchCase="'label'">
+                  {{ element.label }}
+                </label>
 
-                  <!--  
+                <div *ngSwitchCase="'separator'">
+                  <!--
+                todo: Quitar labels de separators el que esta atras
+                -->
+                  <div class="relative flex items-center justify-center w-full">
+                    <div
+                      class="border-b border-gray-400 w-full absolute top-1/2 transform -translate-y-1/2"
+                    ></div>
+                    <span class="px-2 text-sm relative bg-white">
+                      {{ element.label }}
+                    </span>
+                  </div>
+                </div>
+
+                <div *ngSwitchCase="'radio'">
+                  <label
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >{{ element.label }}</label
+                  >
+                  <div class="mt-2 space-y-2">
+                    <!--
                        <div *ngIf="resources[element.key]?.data?.length > 0">
                       <ng-container *ngFor="let option of resources[element.key].data">
-                        
+
                         <option [value]="option.value">
                           {{ option.name }}
-                         </option> 
-                       </ng-container> 
+                         </option>
+                       </ng-container>
                      </div>
-                    
+
                       <div else>
                        <ng-container *ngFor="let option of element.options">
                          <option [value]="option.value">{{ option.label }}</option>
-                       </ng-container> 
+                       </ng-container>
                      </div>
 
                       *ngFor="let option of element.options"
                   -->
-                  <div *ngIf="resources[element.key]?.data?.length > 0" else noResourcesRadio>
- 
-                        <div   *ngFor="let option of resources[element.key].data" class="flex items-center">
-                          <input
-                            type="radio"
-                            [name]="element.key"
-                            [id]="element.key + '-' + option.value"
-                            [formControlName]="element.key"
-                            [value]="option.value"
-                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 focus:ring-offset-0"
-                          />
-                          <label
-                            for="{{ element.key + '-' + option.value }}"
-                            class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300"
-                            >{{ option.name }}</label>
-      
-                        </div>
-                  </div>
-                  <ng-template #noResourcesRadio>
-                    <div   *ngFor="let option of element.options" class="flex items-center">
-                      <input
-                        type="radio"
-                        [name]="element.key"
-                        [id]="element.key + '-' + option.value"
-                        [formControlName]="element.key"
-                        [value]="option.value"
-                        class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 focus:ring-offset-0"
-                      />
-                      <label
-                        for="{{ element.key + '-' + option.value }}"
-                        class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300"
-                        >{{ option.name }}</label>
-  
+                    <div
+                      *ngIf="resources[element.key]?.data?.length > 0"
+                      else
+                      noResourcesRadio
+                    >
+                      <div
+                        *ngFor="let option of resources[element.key].data"
+                        class="flex items-center"
+                      >
+                        <input
+                          type="radio"
+                          [name]="element.key"
+                          [id]="element.key + '-' + option.value"
+                          [formControlName]="element.key"
+                          [value]="option.value"
+                          class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 focus:ring-offset-0"
+                        />
+                        <label
+                          for="{{ element.key + '-' + option.value }}"
+                          class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                          >{{ option.name }}</label
+                        >
+                      </div>
                     </div>
-
-                  </ng-template>
-
-
-
+                    <ng-template #noResourcesRadio>
+                      <div
+                        *ngFor="let option of element.options"
+                        class="flex items-center"
+                      >
+                        <input
+                          type="radio"
+                          [name]="element.key"
+                          [id]="element.key + '-' + option.value"
+                          [formControlName]="element.key"
+                          [value]="option.value"
+                          class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 focus:ring-offset-0"
+                        />
+                        <label
+                          for="{{ element.key + '-' + option.value }}"
+                          class="ml-3 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                          >{{ option.name }}</label
+                        >
+                      </div>
+                    </ng-template>
+                  </div>
                 </div>
-              </div>
 
-              <div *ngSwitchCase="'color'">
-                <label
-                  for="{{ element.key }}"
-                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >{{ element.label }}</label
-                >
+                <div *ngSwitchCase="'color'">
+                  <label
+                    for="{{ element.key }}"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >{{ element.label }}</label
+                  >
+                  <input
+                    type="color"
+                    [id]="element.key"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                    [formControlName]="element.key"
+                  />
+                </div>
+
+                <div *ngSwitchCase="'toggle'">
+                  <label
+                    class="relative inline-flex items-center cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      [id]="element.key"
+                      class="sr-only peer"
+                      [formControlName]="element.key"
+                    />
+
+                    <div
+                      class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-blue-300 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+                    ></div>
+                    <span
+                      class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300"
+                      >{{ element.label }}</span
+                    >
+                  </label>
+                </div>
+
+                <div *ngSwitchCase="'range'">
+                  <input
+                    type="range"
+                    [id]="element.key"
+                    [formControlName]="element.key"
+                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                    [min]="element.min || 0"
+                    [max]="element.max || 100"
+                    [step]="element.step || 1"
+                  />
+                  <label
+                    [for]="element.key"
+                    class="block text-gray-700 text-sm font-bold mb-2"
+                  >
+                    {{ form.get(element.key)?.value }}</label
+                  >
+                </div>
+
+                <div *ngSwitchCase="'date'" class="relative">
+                  <div
+                    class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
+                  >
+                    <svg
+                      class="h-5 w-5 text-gray-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    type="date"
+                    class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                    placeholder="Selecciona una fecha"
+                    [id]="element.key"
+                    [formControlName]="element.key"
+                  />
+                </div>
+
+                <div *ngSwitchCase="'text'">
+                  a {{ form.value[element.disabledField || ""] }} a
+                  {{
+                    form.value[element.disabledField || ""] ==
+                      element.disabledValue
+                  }}
+
+                  <input
+                    *ngSwitchCase="'text'"
+                    type="text"
+                    [id]="element.key"
+                    [formControlName]="element.key"
+                    [placeholder]="element.label"
+                    [readOnly]="
+                      !(
+                        form.value[element.disabledField || ''] ==
+                        element.disabledValue
+                      ) || !true
+                    "
+                    class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                  />
+                </div>
+
                 <input
-                  type="color"
+                  *ngSwitchCase="'email'"
+                  type="email"
                   [id]="element.key"
-                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
                   [formControlName]="element.key"
+                  [placeholder]="element.label"
+                  class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                 />
-              </div>
+                <input
+                  *ngSwitchCase="'number'"
+                  type="number"
+                  [id]="element.key"
+                  [formControlName]="element.key"
+                  [placeholder]="element.label"
+                  class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                />
+                <textarea
+                  *ngSwitchCase="'textarea'"
+                  [id]="element.key"
+                  [formControlName]="element.key"
+                  [placeholder]="element.label"
+                  class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                ></textarea>
 
-              <div *ngSwitchCase="'toggle'">
-                <label class="relative inline-flex items-center cursor-pointer">
+                <div *ngSwitchCase="'checkbox'" class="flex items-center">
                   <input
                     type="checkbox"
                     [id]="element.key"
-                    class="sr-only peer"
                     [formControlName]="element.key"
+                    class="mr-2 leading-tight"
                   />
-
-                  <div
-                    class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-blue-300 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
-                  ></div>
-                  <span
-                    class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300"
-                    >{{ element.label }}</span
-                  >
-                </label>
-              </div>
-
-              <div *ngSwitchCase="'range'">
-         
-                <input
-                  type="range"
-                  [id]="element.key"
-                  [formControlName]="element.key"
-                  class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                  [min]="element.min || 0"
-                  [max]="element.max || 100"
-                  [step]="element.step || 1"
-                />
-                <label
-                [for]="element.key"
-                class="block text-gray-700 text-sm font-bold mb-2"
-              >
-                {{ form.get(element.key)?.value }}</label
-              >
-              </div>
-
-              <div *ngSwitchCase="'date'" class="relative">
-                <div
-                  class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
-                >
-                  <svg
-                    class="h-5 w-5 text-gray-500"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
+                  <label class="text-gray-700 text-sm">{{
+                    element.label
+                  }}</label>
                 </div>
-                <input
-                  type="date"
-                  class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
 
-                  placeholder="Selecciona una fecha"
-                  [id]="element.key"
-                  [formControlName]="element.key"
-                />
-              </div>
-
-              <div *ngSwitchCase="'text'" >
-
-                a {{form.value[element.disabledField||'']}} a
-                {{ form.value[element.disabledField||'' ] == element.disabledValue}}
-               
-                 <input
-                 *ngSwitchCase="'text'"
-                 type="text"
-                 [id]="element.key"
-                 [formControlName]="element.key"
-                 [placeholder]="element.label"
-                 [readOnly]="!(form.value[element.disabledField||'' ] == element.disabledValue) || !true"
-               
-               
-               class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-               />
-               
-               </div>
-
-              <input
-                *ngSwitchCase="'email'"
-                type="email"
-                [id]="element.key"
-                [formControlName]="element.key"
-                [placeholder]="element.label"
-                class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-              />
-              <input
-                *ngSwitchCase="'number'"
-                type="number"
-                [id]="element.key"
-                [formControlName]="element.key"
-                [placeholder]="element.label"
-                class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-              />
-              <textarea
-                *ngSwitchCase="'textarea'"
-                [id]="element.key"
-                [formControlName]="element.key"
-                [placeholder]="element.label"
-                class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-              ></textarea>
-              <div *ngSwitchCase="'checkbox'" class="flex items-center">
-                <input
-                  type="checkbox"
-                  [id]="element.key"
-                  [formControlName]="element.key"
-                  class="mr-2 leading-tight"
-                />
-                <label class="text-gray-700 text-sm">{{ element.label }}</label>
-              </div>
+                <div *ngSwitchCase="'Multiplecheckbox'" class="flex items-center">
 
 
-<div></div>     <div    *ngSwitchCase="'select'"> 
+</div>
+                <div></div>
+                <div *ngSwitchCase="'select'">
+                  <select
+                    [id]="element.key"
+                    [formControlName]="element.key"
+                    class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                  >
+                    <option value="" disabled>
+                      Seleccionar {{ element.label }}
+                    </option>
 
- 
- 
-              <select
-             
-                [id]="element.key"
-                [formControlName]="element.key"
-                class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-              >
-                <option value="" disabled>
-                  Seleccionar {{ element.label }} 
-                   
+                    @if (resources[element.key]?.data?.length > 0) {
 
-                </option>      
-                
-             @if (resources[element.key]?.data?.length > 0) {
+                    <div *ngFor="let option of resources[element.key].data">
+                      <option [value]="option.value">
+                        {{ option.name }}
+                      </option>
+                    </div>
 
-              <div *ngFor="let option of resources[element.key].data">
+                    } @else {
+                    <div *ngFor="let option of element.options">
+                      <option [value]="option.value">
+                        {{ option.name }}
+                      </option>
+                    </div>
 
-                <option [value]="option.value">
-                  {{ option.name }}
-                 </option> 
-              </div>
+                    }
+                  </select>
+                </div>
+              </ng-container>
 
-             } @else {
-              <div *ngFor="let option of element.options">
-
-                <option [value]="option.value">
-                  {{ option.name }}
-                 </option> 
-              </div>
-
-             } 
- 
-              </select>
-
-         
-              </div>
-            </ng-container>
-           
-          </div>
             <div
               *ngIf="
                 form.get(element.key)?.invalid &&
@@ -576,20 +558,15 @@
                 Mínimo {{ element.minLength }} caracteres.
               </div>
             </div>
-          </div>
+
 
 
         </div>
-        
-    </ng-container>
-      </div>
+      </ng-container>
+    </div>
 
-    {{form.value | json}}
-    <br>
-    {{form.valid }}
-    
- 
-    </form>
-  </div>
 
- 
+    <br />
+
+  </form>
+

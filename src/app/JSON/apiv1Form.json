@@ -1,0 +1,120 @@
+[
+  {
+    "fields": [
+
+        {
+    "colZize":12,
+    "label": "Codigo DS",
+    "type": "text",
+    "inputType": "text",
+
+    "position": { "x": 1, "y": 1 },
+    "validators": ["required"],
+    "required": true,
+    "key":"CodigoDistribuidor"
+  },
+       {
+      "colZize":12,
+      "label": "Correo",
+      "type": "email",
+      "inputType": "email",
+      "table": "users",
+      "field": "email",
+      "position": { "x": 1, "y": 2 },
+      "colspan": 3,
+      "gridCols": 6,
+      "validators": ["required", "email"],
+        "key":"Correo"
+    },
+
+    {"colZize":6,
+    "label": "Pais",
+    "type": "select",
+    "field": "Pais",
+     "colspan": 2,
+    "gridCols": 6,
+    "isAPI": false,
+    "options": [
+      { "label": "Mexico",     "subValue":[{}],    "value": "male" },
+      { "label": "Colombia",   "subValue":[{}],    "value": "female" },
+      { "label": "Guatemala",  "subValue":[{}],    "value": "other" }
+    ]
+    ,
+      "key":"Pais"
+  },
+    {
+      "colZize":6,
+      "multiple":true,
+      "label": "¿Acepta los términos?",
+      "type": "checkbox",
+      "position": { "x": 5, "y": 4 },
+      "keyOptions":"Pais",
+      "valueOption":"",
+      "Options":[
+        {"name":"GDL", "value":1010},
+        {"name":"ALG", "value":1011},
+        {"name":"MTY", "value":1012},
+        {"name":"CDMX", "value":1013},
+        {"name":"COL", "value":1210},
+        {"name":"RIC", "value":1211},
+        {"name":"GTM", "value":1310},
+        {"name":"GTM2", "value":1311}
+
+      ],
+      "colspan": 1,
+      "gridCols": 6
+      ,
+      "key":"Planta"
+    }
+
+
+
+    ],
+    "services": [
+      {
+        "create": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users",
+          "method": "POST"
+        },
+        "update": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users",
+          "method": "PUT"
+        },
+        "delete": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users",
+          "method": "DELETE"
+        },
+        "get": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users",
+          "method": "GET"
+        },
+        "getAll": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users",
+          "method": "GET"
+        },
+        "getById": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users/:id",
+          "method": "GET"
+        },
+        "related": [
+
+        ]
+      }
+    ],
+    "nameModel": "Uno De todo",
+    "route": "uno-de-todo",
+    "icon": "fa plus"
+  }
+]

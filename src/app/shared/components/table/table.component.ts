@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter, ContentChild,TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Importa FormsModule para usar ngModel
+import { ActionPoputComponent } from '../action-poput/action-poput.component';
 
 
 @Component({
   selector: 'app-table',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,ActionPoputComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -13,15 +14,15 @@ export class TableComponent {
 
   @ContentChild(TemplateRef) rowTemplate!: TemplateRef<any>;
 
-  
-  @Input() columns: { name: string; label: string; field: string; align: string }[] = [];
+  @Input() name: string = 'tabla'; // Propiedad para determinar si es selección única o múltiple
+  @Input() columns: { separateWords:boolean, type:string, name: string; label: string; field: string; align: string }[] = [];
   @Input() data: any[] = [];
   @Input() single: boolean = false; // Propiedad para determinar si es selección única o múltiple
   @Input() identifier: string = 'id'; // Propiedad para determinar si es selección única o múltiple
   @Output() selectedItemsChange = new EventEmitter<any[]>();
 
   currentPage = 1;
-  itemsPerPage = 20;
+  itemsPerPage = 15;
   selectAll = false;
   selectedItems: any[] = [];
   searchQuery: string = '';

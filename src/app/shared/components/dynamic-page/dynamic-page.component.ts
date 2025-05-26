@@ -27,7 +27,7 @@ export class DynamicPageComponent  implements OnInit, OnDestroy   {
 
 
   ngOnInit(): void {
-    console.log("ACAA");
+
     this.routeSubscription = this.route.params.subscribe(params => {
 
       this.formGroup = params['group']; // Obtén el valor del parámetro 'portadillas'

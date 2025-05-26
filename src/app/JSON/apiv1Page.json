@@ -1,0 +1,84 @@
+[
+  {
+    "fields": [
+{
+  "label": "Api version 1.0 MX",
+      "key":"apiv1MxTable",
+      "colZize":"12",
+      "type": "table",
+
+      "style": "",
+      "icon": "APIV1",
+      "columns":[
+
+  { "type":"field", "separateWords": true , "name": "DSCODE", "label": "DSCODE", "field": "CodigoDistribuidor", "align": "center"},
+  { "type":"field", "separateWords": false , "name": "CONTRASEÑA", "label": "CONTRASEÑA", "field": "Contrasena", "align": "left"},
+  { "type":"field", "separateWords": false , "name": "CORREO", "label": "CORREO", "field": "Correo", "align": "left"},
+  { "type":"field", "separateWords": true , "name": "PAIS", "label": "PAIS", "field": "Pais", "align": "left"},
+  { "type":"field", "separateWords": true , "name": "PLANTA", "label": "PLANTA", "field": "Planta", "align": "left"},
+  { "type":"field", "separateWords": true , "name": "PRECIO", "label": "PRECIO", "field": "Precio", "align": "left"},
+  { "type":"field", "separateWords": true , "name": "STATUS", "label": "STATUS", "field": "Estatus", "align": "left"},
+  { "type":"field", "separateWords": true ,"name": "CREADO", "label": "CREADO", "field": "Creado", "align": "left"},
+  { "type":"field", "separateWords": true , "name": "ULTIMO CCESO", "label": "ULTIMO ACCESO", "field": "UltimoAcceso", "align": "left"}
+      ],
+      "single":false,
+      "identifier":"id",
+      "headertools":["Create","ExportPDF","ExportCSV"],
+      "innerTools":["Edit","Delete"],
+      "data":[]
+
+    }
+    ],
+    "services": [
+      {
+        "create": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users",
+          "method": "POST"
+        },
+        "update": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users",
+          "method": "PUT"
+        },
+        "delete": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users",
+          "method": "DELETE"
+        },
+        "get": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users",
+          "method": "GET"
+        },
+        "getAll": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users",
+          "method": "GET"
+        },
+        "getById": {
+          "principal": true,
+          "name": "userService",
+          "url": "/api/users/:id",
+          "method": "GET"
+        },
+        "related": [    {
+      "key": "apiv1MxTable",
+      "name": "apiv1MxTableService",
+      "url": "https://promocionalesenlinea.net/api/listUsers/?Pais=MX",
+      "method": "GET"
+    }
+
+        ]
+      }
+    ],
+    "nameModel": "Uno De todo",
+    "route": "uno-de-todo",
+    "icon": "fa plus"
+  }
+]

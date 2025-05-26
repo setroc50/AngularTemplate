@@ -1,11 +1,27 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, ElementRef, ViewChild, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray, FormControl } from '@angular/forms';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  ElementRef,
+  ViewChild,
+  inject,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  FormArray,
+  FormControl,
+} from '@angular/forms';
 import { TitleCasePipe, CommonModule } from '@angular/common';
 import { DynamicService } from './../../../services/dynamic-service.service'; // Asegúrate de la ruta correcta
 import { TableComponent } from '../table/table.component';
 
 interface FormElementConfig {
-  colZize?: number;
+  colZize?: string;
   field?: string;
   type: string;
   key: string;
@@ -21,79 +37,219 @@ interface FormElementConfig {
   step?: number;
   accept?: string;
   disabledField?: string;
-  disabledValue?: string
+  disabledValue?: string;
+  columns?:{ type:string, separateWords:boolean, name: string; label: string; field: string; align: string }[];
+  single:boolean,
+  identifier:string;
+  data:[];
 }
-
-
 
 @Component({
   selector: 'app-dynamic-form-page',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TitleCasePipe, TableComponent],
   templateUrl: './dynamic-form-page.component.html',
-  styleUrls: ['./dynamic-form-page.component.css']
+  styleUrls: ['./dynamic-form-page.component.css'],
 })
 export class DynamicFormPageComponent implements OnInit, OnChanges {
-
   private dynamicService = inject(DynamicService);
 
   @Input() operation: 'create' | 'edit' | 'delete' = 'create';
   @Input() formConfigInput: FormElementConfig[] | undefined;
   @Input() initialData: any = {};
 
- 
+  /*  TEMPORAL * */
 
+  selectedItems: any[] = [];
 
+  columns = [
+    { name: 'id', label: 'ID', field: 'id', align: 'left' },
+    { name: 'name', label: 'Name2', field: 'age', align: 'left' },
+    { name: 'age', label: 'Age', field: 'age', align: 'left' },
+    { name: 'city', label: 'City', field: 'otherdata2', align: 'left' },
+    { name: 'nada', label: 'Nada2', field: 'otherdata2', align: 'left' },
+    { name: 'nada5', label: 'Nada4', field: 'otherdata2', align: 'left' },
+    { name: 'nada5', label: 'Nada5', field: 'name', align: 'left' },
+    { name: 'actions', label: 'actions', field: 'actions', align: 'left' },
+  ];
 
+  // Datos de la tabla
+  data = [
+    {
+      id: 1,
+      name: 'John Doe',
+      age: 28,
+      city: 'New York',
+      otherdata1: 'Extra 1',
+      otherdata2: 'Extra 2',
+    },
+    {
+      id: 2,
+      name: 'Jane Smith',
+      age: 34,
+      city: 'Los Angeles',
+      otherdata1: 'Extra 3',
+    },
+    {
+      id: 3,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 4,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 5,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 6,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 7,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 8,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 9,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 10,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 11,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 12,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 13,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 14,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 15,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 16,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 17,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 18,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 19,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 20,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 21,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 22,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 23,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    {
+      id: 23,
+      name: 'Sam Green',
+      age: 45,
+      city: 'Chicago',
+      otherdata2: 'Extra 4',
+    },
+    // Agrega más datos aquí...
+  ];
 
-/*  TEMPORAL * */
-
-selectedItems: any[] = []
-
-
-columns = [
-  { name: 'id', label: 'ID', field: 'id', align: 'left' },
-  { name: 'name', label: 'Name2', field: 'age', align: 'left' },
-  { name: 'age', label: 'Age', field: 'age', align: 'left' },
-  { name: 'city', label: 'City', field: 'otherdata2', align: 'left' },
-  { name: 'nada', label: 'Nada2', field: 'otherdata2', align: 'left' },
-  { name: 'nada5', label: 'Nada4', field: 'otherdata2', align: 'left' },
-  { name: 'nada5', label: 'Nada5', field: 'name', align: 'left' },
-  { name: 'actions', label: 'actions', field: 'actions', align: 'left' },
-];
-
-// Datos de la tabla
-data = [
-  { id: 1, name: 'John Doe', age: 28, city: 'New York', otherdata1: 'Extra 1', otherdata2: 'Extra 2' },
-  { id: 2, name: 'Jane Smith', age: 34, city: 'Los Angeles', otherdata1: 'Extra 3' },
-  { id: 3, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 4, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 5, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 6, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 7, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 8, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 9, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 10, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 11, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 12, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 13, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 14, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 15, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 16, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 17, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 18, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 19, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 20, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 21, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 22, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 23, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  { id: 23, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-  // Agrega más datos aquí...
-];
-
-/*  TEMPORAL * */
-resources:{ [key: string]: any } = {};
-services:[] = [];
+  /*  TEMPORAL * */
+  resources: { [key: string]: any } = {};
+  services: [] = [];
 
   form!: FormGroup;
   formConfig: FormElementConfig[] | undefined;
@@ -112,10 +268,10 @@ services:[] = [];
     edit: 'fa-solid fa-pencil',
 
     delete: 'fa-solid fa-trash',
-    view: 'fa-solid fa-pencil'
+    view: 'fa-solid fa-pencil',
   };
-/**
- 
+  /**
+
 <i class=""></i>
 
  */
@@ -123,30 +279,22 @@ services:[] = [];
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-
-
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['formConfigInput'] && changes['formConfigInput'].currentValue) {
-
-       this.formConfig = changes['formConfigInput'].currentValue?.[0].fields;
-      this.services  = changes['formConfigInput'].currentValue?.[0].services;
+      this.formConfig = changes['formConfigInput'].currentValue?.[0].fields;
+      this.services = changes['formConfigInput'].currentValue?.[0].services;
       //this.formConfig = changes['formConfigInput'].currentValue;
       if (this.services && this.services.length > 0) {
-        console.log((this.services as any[])[0].related);   
+        console.log((this.services as any[])[0].related);
         this.cargarRecursos((this.services as any[])[0].related);
-           }
+      }
       this.createForm();
     }
   }
 
-
-
- 
-  cargarRecursos(endpoint:[]): void {
- 
+  cargarRecursos(endpoint: []): void {
     this.dynamicService.getMultipleWithKeys<[]>(endpoint).subscribe(
       (data) => {
         console.log('Recursos cargados:', data);
@@ -156,19 +304,22 @@ services:[] = [];
         console.error('Error al cargar recursos:', error);
       }
     );
-  } 
+  }
 
   createForm(): void {
     if (!this.formConfig) {
       return;
     }
     const controls: any = {};
-    this.formConfig.forEach(element => {
+    this.formConfig.forEach((element) => {
       if (element.type === 'multipleImageDrag') {
         controls[element.key] = this.fb.array([]);
         this.selectedFiles[element.key] = [];
         this.imagePreviews[element.key] = [];
-        if (this.initialData[element.key] && Array.isArray(this.initialData[element.key])) {
+        if (
+          this.initialData[element.key] &&
+          Array.isArray(this.initialData[element.key])
+        ) {
           this.initialData[element.key].forEach((url: string) => {
             (controls[element.key] as FormArray).push(new FormControl(url));
             this.imagePreviews[element.key]?.push(url);
@@ -178,12 +329,18 @@ services:[] = [];
         controls[element.key] = this.fb.array([]);
         this.genericFiles[element.key] = [];
         this.genericFileNames[element.key] = [];
-        if (this.initialData[element.key] && Array.isArray(this.initialData[element.key])) {
+        if (
+          this.initialData[element.key] &&
+          Array.isArray(this.initialData[element.key])
+        ) {
           // Aquí podrías necesitar lógica diferente si initialData contiene información de archivos genéricos
           // Por ahora, solo inicializamos el FormArray
         }
       } else {
-        controls[element.key] = [this.initialData[element.key] || '', this.getValidators(element)];
+        controls[element.key] = [
+          this.initialData[element.key] || '',
+          this.getValidators(element),
+        ];
       }
     });
     this.form = this.fb.group(controls);
@@ -213,14 +370,22 @@ services:[] = [];
     this.isVisible = true;
     if (this.operation === 'edit' && Object.keys(this.initialData).length > 0) {
       this.form.patchValue(this.initialData);
-      this.formConfig?.forEach(element => {
-        if (element.type === 'multipleImageDrag' && Array.isArray(this.initialData[element.key])) {
+      this.formConfig?.forEach((element) => {
+        if (
+          element.type === 'multipleImageDrag' &&
+          Array.isArray(this.initialData[element.key])
+        ) {
           this.imagePreviews[element.key] = [...this.initialData[element.key]];
           this.selectedFiles[element.key] = [];
-        } else if (element.type === 'multipleFileDragGeneric' && Array.isArray(this.initialData[element.key])) {
+        } else if (
+          element.type === 'multipleFileDragGeneric' &&
+          Array.isArray(this.initialData[element.key])
+        ) {
           // Lógica para cargar nombres de archivos iniciales si es necesario
           this.genericFiles[element.key] = [];
-          this.genericFileNames[element.key] = [...this.initialData[element.key]]; // Asumiendo initialData tiene nombres
+          this.genericFileNames[element.key] = [
+            ...this.initialData[element.key],
+          ]; // Asumiendo initialData tiene nombres
         }
       });
     } else if (this.operation === 'create') {
@@ -305,7 +470,7 @@ services:[] = [];
   }
 
   getMultipleFileNames(key: string): string[] {
-    return this.selectedFiles[key]?.map(file => file.name) || [];
+    return this.selectedFiles[key]?.map((file) => file.name) || [];
   }
 
   removeImage(key: string, index: number): void {
@@ -329,7 +494,11 @@ services:[] = [];
   }
 
   drop(key: string, dropIndex: number): void {
-    if (key === this.draggedKey && this.draggedIndex !== null && this.draggedIndex !== dropIndex) {
+    if (
+      key === this.draggedKey &&
+      this.draggedIndex !== null &&
+      this.draggedIndex !== dropIndex
+    ) {
       const imagePreviews = [...this.imagePreviews[key]];
       const selectedFiles = [...this.selectedFiles[key]];
       const imageArray = this.form.get(key) as FormArray;
@@ -349,7 +518,7 @@ services:[] = [];
       controls.splice(this.draggedIndex, 1);
       controls.splice(dropIndex, 0, draggedControl);
       imageArray.clear();
-      controls.forEach(control => imageArray.push(control));
+      controls.forEach((control) => imageArray.push(control));
 
       this.draggedIndex = null;
       this.draggedKey = null;
@@ -372,7 +541,7 @@ services:[] = [];
 
   handleGenericFiles(files: FileList, key: string): void {
     this.genericFiles[key] = Array.from(files);
-    this.genericFileNames[key] = Array.from(files).map(file => file.name);
+    this.genericFileNames[key] = Array.from(files).map((file) => file.name);
     const filesArray = this.form.get(key) as FormArray;
     filesArray.clear();
     Array.from(files).forEach(() => filesArray.push(new FormControl(null))); // No necesitamos la URL, solo el archivo
@@ -399,7 +568,11 @@ services:[] = [];
   }
 
   dropGeneric(key: string, dropIndex: number): void {
-    if (key === this.draggedGenericKey && this.draggedGenericIndex !== null && this.draggedGenericIndex !== dropIndex) {
+    if (
+      key === this.draggedGenericKey &&
+      this.draggedGenericIndex !== null &&
+      this.draggedGenericIndex !== dropIndex
+    ) {
       const genericFiles = [...this.genericFiles[key]];
       const genericFileNames = [...this.genericFileNames[key]];
       const filesArray = this.form.get(key) as FormArray;
@@ -419,10 +592,10 @@ services:[] = [];
       controls.splice(this.draggedGenericIndex, 1);
       controls.splice(dropIndex, 0, draggedControl);
       filesArray.clear();
-      controls.forEach(control => filesArray.push(control));
+      controls.forEach((control) => filesArray.push(control));
 
       this.draggedGenericIndex = null;
       this.draggedGenericKey = null;
     }
   }
-}   
+}

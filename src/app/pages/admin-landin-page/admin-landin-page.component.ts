@@ -15,17 +15,17 @@ export class AdminLandinPageComponent {
 
   createFormConfig = (createFormConfig as any).default;
 
-  
+
 
   columns = [
-    { name: 'id', label: 'ID', field: 'id', align: 'left' },
-    { name: 'name', label: 'Name2', field: 'age', align: 'left' },
-    { name: 'age', label: 'Age', field: 'age', align: 'left' },
-    { name: 'city', label: 'City', field: 'otherdata2', align: 'left' },
-    { name: 'nada', label: 'Nada2', field: 'otherdata2', align: 'left' },
-    { name: 'nada5', label: 'Nada4', field: 'otherdata2', align: 'left' },
-    { name: 'nada5', label: 'Nada5', field: 'name', align: 'left' },
-    { name: 'actions', label: 'actions', field: 'actions', align: 'left' },
+    {type:"test", separateWords:false,  name: 'id', label: 'ID', field: 'id', align: 'left' },
+    {type:"test", separateWords:false, name: 'name', label: 'Name2', field: 'age', align: 'left' },
+    {type:"test", separateWords:false, name: 'age', label: 'Age', field: 'age', align: 'left' },
+    {type:"test", separateWords:false, name: 'city', label: 'City', field: 'otherdata2', align: 'left' },
+    {type:"test", separateWords:false, name: 'nada', label: 'Nada2', field: 'otherdata2', align: 'left' },
+    {type:"test", separateWords:false, name: 'nada5', label: 'Nada4', field: 'otherdata2', align: 'left' },
+    {type:"test", separateWords:false, name: 'nada5', label: 'Nada5', field: 'name', align: 'left' },
+    {type:"test", separateWords:false, name: 'actions', label: 'actions', field: 'actions', align: 'left' },
   ];
 
   // Datos de la tabla
@@ -43,7 +43,7 @@ export class AdminLandinPageComponent {
     { id: 11, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
     { id: 12, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
     { id: 13, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
-    { id: 14, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
+    { id: 14, name : 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
     { id: 15, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
     { id: 16, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
     { id: 17, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
@@ -56,7 +56,7 @@ export class AdminLandinPageComponent {
     { id: 23, name: 'Sam Green', age: 45, city: 'Chicago', otherdata2: 'Extra 4' },
     // Agrega más datos aquí...
   ];
-  
+
   selectedItems: any[] = []
 
   editar = (a:any) => {

@@ -49,6 +49,26 @@ export class MenuComponent implements OnInit {
       ]
     },
     {
+      "icon": "fa-solid fa-globe",
+      "name": "API",
+      "description": "Catálogo de productos",
+      "submenu": [
+        {
+          "icon": "fa-solid fa-hexagon-nodes",
+          "name": "V1",
+          "description": "Ver todos los productos",
+          "route": "digitalplatforms/apiv1"
+        },
+        {
+          "icon": "fa-solid fa-share-nodes",
+          "name": "v2",
+          "description": "portadillas",
+          "route": "digitalplatforms/webportadillas"
+        },
+
+      ]
+    },
+    {
       "icon": "fa fa-cog",
       "name": "Configuración",
       "description": "Opciones de configuración",

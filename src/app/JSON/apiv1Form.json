@@ -41,31 +41,7 @@
     ]
     ,
       "key":"Pais"
-  },
-    {
-      "colZize":6,
-      "multiple":true,
-      "label": "¿Acepta los términos?",
-      "type": "checkbox",
-      "position": { "x": 5, "y": 4 },
-      "keyOptions":"Pais",
-      "valueOption":"",
-      "Options":[
-        {"name":"GDL", "value":1010},
-        {"name":"ALG", "value":1011},
-        {"name":"MTY", "value":1012},
-        {"name":"CDMX", "value":1013},
-        {"name":"COL", "value":1210},
-        {"name":"RIC", "value":1211},
-        {"name":"GTM", "value":1310},
-        {"name":"GTM2", "value":1311}
-
-      ],
-      "colspan": 1,
-      "gridCols": 6
-      ,
-      "key":"Planta"
-    }
+  }
 
 
 

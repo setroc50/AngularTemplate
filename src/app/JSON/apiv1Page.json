@@ -2,6 +2,8 @@
   {
     "fields": [
 {
+  "layoutGroup":"digitalplatforms",
+    "layoutName":"apiv1Form",
   "label": "Api version 1.0 MX",
       "key":"apiv1MxTable",
       "colZize":"12",
@@ -76,6 +78,103 @@
 
         ]
       }
+    ],
+
+    "formFields":[
+  {
+    "colZize":12,
+    "label": "Nombre",
+    "type": "text",
+    "inputType": "text",
+    "table": "users",
+    "field": "firstName",
+    "position": { "x": 1, "y": 1 },
+    "colspan": 2,
+    "gridCols": 6,
+    "validators": ["required"],
+    "required": true,
+      "key":"text1"
+
+  },
+    {
+    "colZize":12,
+    "label": "Nombre",
+    "type": "text",
+    "inputType": "text",
+    "table": "users",
+    "field": "firstName",
+    "position": { "x": 1, "y": 1 },
+    "colspan": 2,
+    "gridCols": 6,
+    "validators": ["required"],
+    "required": true,
+      "key":"text1"
+
+  },
+    {
+
+    "colZize":12,
+    "label": "Nombre",
+    "type": "text",
+    "inputType": "text",
+    "table": "users",
+    "field": "firstName",
+    "position": { "x": 1, "y": 1 },
+    "colspan": 2,
+    "gridCols": 6,
+    "validators": ["required"],
+    "required": true,
+      "key":"text1"
+
+  },
+    {
+    "colZize":12,
+    "label": "Nombre",
+    "type": "text",
+    "inputType": "text",
+    "table": "users",
+    "field": "firstName",
+    "position": { "x": 1, "y": 1 },
+    "colspan": 2,
+    "gridCols": 6,
+    "validators": ["required"],
+    "required": true,
+      "key":"text1"
+
+  },
+    {
+    "colZize":12,
+    "label": "Nombre",
+    "type": "text",
+    "inputType": "text",
+    "table": "users",
+    "field": "firstName",
+    "position": { "x": 1, "y": 1 },
+    "colspan": 2,
+    "gridCols": 6,
+    "validators": ["required"],
+    "required": true,
+      "key":"text1"
+
+  },
+    {
+    "colZize":12,
+    "label": "Nombre",
+    "type": "text",
+    "inputType": "text",
+    "table": "users",
+    "field": "firstName",
+    "position": { "x": 1, "y": 1 },
+    "colspan": 2,
+    "gridCols": 6,
+    "validators": ["required"],
+    "required": true,
+      "key":"text1"
+
+  }
+
+
+
     ],
     "nameModel": "Uno De todo",
     "route": "uno-de-todo",

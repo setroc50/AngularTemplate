@@ -18,7 +18,7 @@ import {
 } from '@angular/forms';
 import { TitleCasePipe, CommonModule } from '@angular/common';
 import { DynamicService } from './../../../services/dynamic-service.service'; // Asegúrate de la ruta correcta
-import { TableComponent } from '../table/table.component';
+
 import { MultipleCheckboxComponent } from "../form/multiple-checkbox/multiple-checkbox.component";
 
 interface FormElementConfig {
@@ -43,18 +43,16 @@ interface FormElementConfig {
   single:boolean,
   identifier:string;
   data:[];
-  layoutGroup?:string;
-  layoutName?:string;
 }
 
 @Component({
-  selector: 'app-dynamic-form-page',
+  selector: 'app-dynamic-form-secondpage',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TitleCasePipe, TableComponent, MultipleCheckboxComponent],
-  templateUrl: './dynamic-form-page.component.html',
-  styleUrls: ['./dynamic-form-page.component.css'],
+  imports: [CommonModule, ReactiveFormsModule, TitleCasePipe,  MultipleCheckboxComponent],
+  templateUrl: './dynamic-form-secondpage.component.html',
+  styleUrls: ['./dynamic-form-secondpage.component.css'],
 })
-export class DynamicFormPageComponent implements OnInit, OnChanges {
+export class DynamicFormSecondarypageComponent implements OnInit, OnChanges {
   private dynamicService = inject(DynamicService);
 
   @Input() operation: 'create' | 'edit' | 'delete' = 'create';

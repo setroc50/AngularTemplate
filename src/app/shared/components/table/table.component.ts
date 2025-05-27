@@ -1,12 +1,12 @@
 import { Component, Input, Output, EventEmitter, ContentChild,TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Importa FormsModule para usar ngModel
-import { ActionPoputComponent } from '../action-poput/action-poput.component';
+import { FormGroup, FormsModule } from '@angular/forms'; // Importa FormsModule para usar ngModel
+import { ActionDynamicpoputComponent } from '../action-dynamicpoput-page/action-dynamicpoput-page.component';
 
 
 @Component({
   selector: 'app-table',
-  imports: [CommonModule, FormsModule,ActionPoputComponent],
+  imports: [CommonModule, FormsModule,ActionDynamicpoputComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -19,7 +19,13 @@ export class TableComponent {
   @Input() data: any[] = [];
   @Input() single: boolean = false; // Propiedad para determinar si es selección única o múltiple
   @Input() identifier: string = 'id'; // Propiedad para determinar si es selección única o múltiple
+  @Input() formFields: [] = []; // Propiedad para determinar si es selección única o múltiple
   @Output() selectedItemsChange = new EventEmitter<any[]>();
+  @Input() formInstance!: FormGroup; // <--- NUEVO: Recibe el FormGroup construido
+
+  @Input() layoutName: string = ""; // <--- NUEVO: Recibe el FormGroup construido
+  @Input() layoutGroup: string = ""; // <--- NUEVO: Recibe el FormGroup construido
+
 
   currentPage = 1;
   itemsPerPage = 15;

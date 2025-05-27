@@ -5,7 +5,7 @@ import { Observable,catchError,forkJoin, map, of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class DynamicService { 
+export class DynamicService {
   private apiUrl = '';
   private http = inject(HttpClient);
 
@@ -53,11 +53,12 @@ export class DynamicService {
       return this.get<T>(end.url)
     }
     );
-      
-    
+
+
     return forkJoin(requests);
   }
- 
+
+
   create<T>(endpoint: string, data: any): Observable<T> {
     const url = `${this.apiUrl}/${endpoint}`;
     return this.http.post<T>(url, data);
@@ -89,6 +90,11 @@ export class DynamicService {
 
   delete<T>(endpoint: string, id: number): Observable<T> {
     const url = `${this.apiUrl}/${endpoint}/${id}`;
+    return this.http.delete<T>(url);
+  }
+
+    createOrUpdate<T>(endpoint: string): Observable<T> {
+    const url = `${endpoint}`;
     return this.http.delete<T>(url);
   }
 }

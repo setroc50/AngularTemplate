@@ -57,7 +57,7 @@ export class MenuComponent implements OnInit {
           "icon": "fa-solid fa-hexagon-nodes",
           "name": "V1",
           "description": "Ver todos los productos",
-          "route": "digitalplatforms/apiv1"
+          "route": "digitalplatforms/apiv1Page"
         },
         {
           "icon": "fa-solid fa-share-nodes",

@@ -1,6 +1,6 @@
 
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+  <form [formGroup]="form" (ngSubmit)="onSubmit('endPoint')" class="space-y-4">
     <!-- -->
 
     <div class="grid grid-cols-12 gap-5 p-4">
@@ -26,30 +26,6 @@
 
 
               <ng-container [ngSwitch]="element.type">
-
-          <div *ngSwitchCase="'table'">
-
-          <app-table
-          [formInstance] = form
-          [name]="element.label ||''"
-          [columns]="element.columns||[]"
-          [single]="element.single||false"
-          [identifier]="element.identifier||'id'"
-          [layoutName]="element.layoutName||''"
-          [layoutGroup]="element.layoutGroup||''"
-          [data]="resources[element.key].response"
-        [formFields] = formFields
-          (selectedItemsChange)="resources[element.key].selectedItems = $event"
-        >
-          <ng-template let-row let-id="identifier">
-            <div class="flex space-x-3"></div>
-          </ng-template>
-        </app-table>
-
-{{resources[element.key].selectedItems |json}}
-                </div>
-
-
 
                 <div *ngSwitchCase="'multipleFileDragGeneric'">
                   <label

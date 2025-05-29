@@ -1,6 +1,6 @@
 
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit('endPoint')" class="space-y-4">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
     <!-- -->
 
     <div class="grid grid-cols-12 gap-5 p-4">
@@ -443,24 +443,21 @@
                   />
                 </div>
 
-                <input
-                  *ngSwitchCase="'email'"
+                <input *ngSwitchCase="'email'"
                   type="email"
                   [id]="element.key"
                   [formControlName]="element.key"
                   [placeholder]="element.label"
                   class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                 />
-                <input
-                  *ngSwitchCase="'number'"
+                <input *ngSwitchCase="'number'"
                   type="number"
                   [id]="element.key"
                   [formControlName]="element.key"
                   [placeholder]="element.label"
                   class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
                 />
-                <textarea
-                  *ngSwitchCase="'textarea'"
+                <textarea *ngSwitchCase="'textarea'"
                   [id]="element.key"
                   [formControlName]="element.key"
                   [placeholder]="element.label"

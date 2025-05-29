@@ -7,12 +7,14 @@ import {getConfig } from '../../../JSON/jsonConfigs';
 
 
 import { DynamicFormSecondarypageComponent } from '../dynamic-form-secondpage/dynamic-form-secondpage.component';
+import { FormInputManagerComponent } from '../forms/form-input-manager/form-input-manager.component';
+
 
 
 @Component({
   selector: 'app-dynamicpoput-page',
   standalone: true,
-  imports: [CommonModule, DynamicFormSecondarypageComponent, ],
+  imports: [CommonModule, DynamicFormSecondarypageComponent,FormInputManagerComponent ],
   templateUrl: './action-dynamicpoput-page.component.html',
 
 })

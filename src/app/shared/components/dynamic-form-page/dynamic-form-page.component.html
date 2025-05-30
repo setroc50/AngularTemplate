@@ -42,7 +42,12 @@
           (selectedItemsChange)="resources[element.key].selectedItems = $event"
         >
           <ng-template let-row let-id="identifier">
-            <div class="flex space-x-3"></div>
+
+
+                             <app-dynamicpoput-page [layoutGroup]="'digitalplatforms'" [layoutName]="'apiv1Page'"></app-dynamicpoput-page>
+                             <app-dynamicpoput-page [layoutGroup]="'digitalplatforms'" [layoutName]="'apiv1Page'"></app-dynamicpoput-page>
+                             <app-dynamicpoput-page [layoutGroup]="'digitalplatforms'" [layoutName]="'apiv1Page'"></app-dynamicpoput-page>
+
           </ng-template>
         </app-table>
 

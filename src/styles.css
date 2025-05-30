@@ -32,6 +32,7 @@
   --color-foreground: var(--foreground);
 
   --color-primary: var(--primary);
+  --color-primaryhover: var(--primaryhover);
 
 
     --color-backgroundTemplate:  var(--backgroundTemplate);
@@ -210,6 +211,8 @@
     --backgroundTemplate: #eceef0;
 
     --primary: #EA2A27;
+    --primaryhover: #670806;
+
     --primary-foreground: #374153;
 
     --secondary: #FFDE1B;

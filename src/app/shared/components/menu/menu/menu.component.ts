@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit {
   menuItems = signal<MenuItem[]>([]);
   initialMenuItems: MenuItem[] = [
 
-
+/*
     //digitalplatforms_portadillas
     {
       "icon": "fa fa-folder",
@@ -47,7 +47,7 @@ export class MenuComponent implements OnInit {
         },
 
       ]
-    },
+    },*/
     {
       "icon": "fa-solid fa-globe",
       "name": "API",

@@ -9,7 +9,7 @@
     <div class="max-h-[calc(87vh-4rem)] min-h-[450px] overflow-y-auto relative flex flex-col">
 
       <table class="min-w-full border-separate flex-grow" style="border-spacing: 0;">
-        <thead class="sticky top-0 z-20">
+        <thead class="sticky top-0 z-10">
           <tr>
             <th colspan="100" class="p-0"> <div class="bg-slate-50 dark:bg-slate-700/80 px-4 sm:px-6 lg:px-8 relative flex flex-wrap items-center justify-between gap-4 py-3 border-b border-slate-200 dark:border-slate-700">
                 <div class="flex shrink-0 items-center">
@@ -126,7 +126,9 @@
                   'text-center whitespace-nowrap': !col.separateWords
                 }">
                   <ng-container *ngIf="col.field === 'actions'; else displayField">
+                     <div class="flex flex-row items-center space-x-2">
                     <ng-container *ngTemplateOutlet="rowTemplate; context: { $implicit: row, identifier: row[identifier] }"></ng-container>
+                  </div>
                   </ng-container>
                   <ng-template #displayField>
                     {{ row[col.field] || '-' }}
@@ -145,7 +147,7 @@
             </tbody>
           </ng-template>
         </ng-template>
-        <tfoot class="sticky bottom-0 z-11
+        <tfoot class="sticky bottom-0
                       bg-slate-50 dark:bg-slate-700/80 border-t border-slate-200 dark:border-slate-700">
           <tr>
             <td [attr.colspan]="(columns ? columns.length : 0) + 1">

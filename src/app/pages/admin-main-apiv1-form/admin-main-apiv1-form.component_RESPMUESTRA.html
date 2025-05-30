@@ -1,0 +1,25 @@
+<div class="my-custom-form-container p-4 md:p-8 max-w-3xl mx-auto bg-gray-50 dark:bg-gray-900 rounded-lg shadow-lg">
+  <h1 class="text-2xl font-bold text-center mb-6 text-gray-800 dark:text-gray-100">Mi Formulario Personalizado</h1>
+  <form [formGroup]="myForm" (ngSubmit)="onActualFormSubmit()" novalidate>
+    <div class="space-y-6">
+      <div *ngFor="let fieldConfig of formStructure" class="field-wrapper">
+
+        <app-form-input-manager
+          [element]="fieldConfig"
+          [control]="getControl(fieldConfig.key)!" [parentFormGroup]="myForm"
+        ></app-form-input-manager>
+
+      </div>
+    </div>
+
+    <div class="mt-8 pt-6 border-t border-gray-300 dark:border-gray-700 flex justify-end">
+      <button
+        type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed"
+        [disabled]="myForm.invalid"
+      >
+        Enviar Formulario
+      </button>
+    </div>
+  </form>
+</div>

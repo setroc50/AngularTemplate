@@ -83,7 +83,7 @@ export class MultipleCheckboxComponent implements ControlValueAccessor, OnInit, 
 
   ngOnInit(): void {
     const componentId = this.config?.key || 'UnknownMultiCheckbox';
-    console.log(`MultipleCheckboxComponent (${componentId}): ngOnInit INICIADO - Control inicial value:`, this.control?.value);
+
 
     if (!this.control) {
       console.error(`MultipleCheckboxComponent (${componentId}): FormControl NO FUE PROPORCIONADO.`);
@@ -99,30 +99,30 @@ export class MultipleCheckboxComponent implements ControlValueAccessor, OnInit, 
     this.writeValue(this.control.value);
 
     this.controlValueChangesSubscription = this.control.valueChanges.subscribe(valueFromControl => {
-      console.log(`MultipleCheckboxComponent (${componentId}): valueChanges from parent control RECEIVED:`, valueFromControl);
+
       this.writeValue(valueFromControl);
     });
 
     if (!this.config || !this.config.key) {
-      console.error(`MultipleCheckboxComponent (${componentId}): La propiedad "key" en la configuración es obligatoria.`);
+
     }
-    console.log(`MultipleCheckboxComponent (${componentId}): ngOnInit FINALIZADO. Initial _selectedValues:`, this._selectedValues);
+
   }
 
   ngOnDestroy(): void {
     const componentId = this.config?.key || 'UnknownMultiCheckbox';
-    console.log(`MultipleCheckboxComponent (${componentId}): ngOnDestroy - Desuscribiendo de valueChanges.`);
+
     this.controlValueChangesSubscription?.unsubscribe();
   }
 
   writeValue(value: any[] | null): void {
     const componentId = this.config?.key || 'UnknownMultiCheckbox';
-    console.log(`MultipleCheckboxComponent (${componentId}): writeValue CALLED with:`, value);
+
     const newValues = Array.isArray(value) ? [...value] : [];
 
     if (JSON.stringify(this._selectedValues) !== JSON.stringify(newValues)) {
       this._selectedValues = newValues;
-      console.log(`MultipleCheckboxComponent (${componentId}): internal _selectedValues SET to:`, this._selectedValues);
+
     } else {
       // console.log(`MultipleCheckboxComponent (${componentId}): writeValue - nuevo valor es idéntico al actual _selectedValues.`);
     }
@@ -130,13 +130,13 @@ export class MultipleCheckboxComponent implements ControlValueAccessor, OnInit, 
 
   registerOnChange(fn: (value: any[] | null) => void): void {
     const componentId = this.config?.key || 'UnknownMultiCheckbox';
-    console.log(`MultipleCheckboxComponent (${componentId}): registerOnChange CALLED.`);
+
     this.onChangeCallback = fn;
   }
 
   registerOnTouched(fn: () => void): void {
     const componentId = this.config?.key || 'UnknownMultiCheckbox';
-    console.log(`MultipleCheckboxComponent (${componentId}): registerOnTouched CALLED.`);
+
     this.onTouchedCallback = fn;
   }
 
@@ -154,8 +154,8 @@ export class MultipleCheckboxComponent implements ControlValueAccessor, OnInit, 
       return;
     }
     const isChecked = target.checked;
-    console.log(`MultipleCheckboxComponent (${componentId}): onCheckboxChange for value: ${optionValue}, isChecked: ${isChecked}`);
-    console.log(`MultipleCheckboxComponent (${componentId}): _selectedValues BEFORE change:`, JSON.parse(JSON.stringify(this._selectedValues)));
+
+
 
     const newSelectedValuesArray = [...this._selectedValues];
 
@@ -171,22 +171,21 @@ export class MultipleCheckboxComponent implements ControlValueAccessor, OnInit, 
     }
 
     this._selectedValues = newSelectedValuesArray; // Actualiza el estado interno primero
-    console.log(`MultipleCheckboxComponent (${componentId}): _selectedValues AFTER change:`, this._selectedValues);
+
 
     // ----- INICIO DE CAMBIO IMPORTANTE -----
     if (this.control) {
       // Actualiza el FormControl padre directamente
       this.control.setValue(this._selectedValues); // No es necesario { emitEvent: false } aquí, queremos que emita
-      console.log(`MultipleCheckboxComponent (${componentId}): this.control.setValue CALLED with:`, this._selectedValues);
-      console.log(`MultipleCheckboxComponent (${componentId}): this.control.value AFTER setValue:`, JSON.parse(JSON.stringify(this.control.value)));
+
     } else {
-      console.error(`MultipleCheckboxComponent (${componentId}): this.control es null/undefined en onCheckboxChange!`);
+
     }
 
     // Llama a onChangeCallback también, para cumplir con CVA por si algo más depende de ello.
     // Podría ser redundante si this.control.setValue ya hizo todo el trabajo.
     this.onChangeCallback(this._selectedValues);
-    // console.log(`MultipleCheckboxComponent (${componentId}): onChangeCallback CALLED with:`, this._selectedValues);
+
     // ----- FIN DE CAMBIO IMPORTANTE -----
 
     this.onTouchedCallback();

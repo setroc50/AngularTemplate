@@ -35,72 +35,103 @@ export class AdminMainApiv1FormComponent implements OnInit {
 
   defineFormStructure(): void {
     this.formStructure = [
-          {
-        key: 'Pais',
-        type: 'radio',
-        label: 'Pais',
-        required: true,
-        options: [
-          { value: '1010', name: 'MX' },
-          { value: '1210', name: 'COL' },
-          { value: '1310', name: 'GTM' }
-        ] as RadioButtonOption[]
-      },
 
       {
-        key: 'CodigoDistribuidor',
-        type: 'text',
-        label: 'Codigo DS',
-        placeholder: 'Codigo',
-        required: true
-      },
-      {
-        key: 'Contrasena',
-        type: 'text',
-        label: 'Contraseña',
-        placeholder: 'Contraseña',
-        required: true
-      },
-      {
-        key: 'Correo',
+        key: 'userEmail',
         type: 'email',
         label: 'Correo Electrónico',
-        placeholder: 'correoDS@correo.com',
+        placeholder: 'tu@correo.com',
         required: true
       },
-         {
-        key: 'CorreosCopia',
-        type: 'text',
-        label: 'Correos Copia',
-        placeholder: 'Separar por ;',
-
+      {
+        key: 'userAge',
+        type: 'number',
+        label: 'Edad',
+        placeholder: 'Tu edad',
+        min: 18,
+        max: 99
       },
       {
-        key: 'Planta',
-        type: 'MultipleCheckbox', // Asegúrate que este string coincida con tu ngSwitchCase
-        label: 'Almacenes - Stocks',
-         required: true,
+        key: 'profileBio',
+        type: 'textarea',
+        label: 'Biografía Corta',
+        placeholder: 'Cuéntanos algo sobre ti...',
+        rows: 3,
+        maxLength: 200
+      },
+      {
+        key: 'userRole',
+        type: 'select',
+        label: 'Rol de Usuario',
+        placeholder: 'Selecciona un rol',
+        required: true,
         options: [
-           { value: 1010, name: 'MX-Guadalajara' },
-           { value: 1011, name: 'MX-Algarín' },
-           { value: 1012, name: 'MX-Monterrey' },
-           { value: 1013, name: 'MX-Gustavo Baz' },
-           { value: 1014, name: 'MX-Torreón' },
-          { value: 1210, name: 'COL-Colombia' },
-          { value: 1211, name: 'COL-RIC' },
-          { value: 1310, name: 'GTM-Guatemala' }
+          { value: 'admin', name: 'Administrador' },
+          { value: 'editor', name: 'Editor' },
+          { value: 'viewer', name: 'Visualizador' }
+        ] as SelectOption[] // Casteo para asegurar el tipo
+      },
+      {
+        key: 'status',
+        type: 'radio',
+        label: 'Estado Actual',
+        required: true,
+        options: [
+          { value: '1010', name: 'Almacen1' },
+          { value: '1210', name: 'De Permiso' },
+          { value: '1310', name: 'Inactivo' }
+        ] as RadioButtonOption[]
+      },
+      {
+        key: 'preferences',
+        type: 'MultipleCheckbox', // Asegúrate que este string coincida con tu ngSwitchCase
+        label: 'Preferencias de Notificación',
+        options: [
+           { value: 1010, name: 'GDL' },
+          { value: 1210, name: 'COL' },
+          { value: 1310, name: 'GTM' }
         ] as MultiCheckboxOption[]
       },
-          {
-        key: 'Estatus',
+      {
+        key: 'eventDate',
+        type: 'date',
+        label: 'Fecha del Evento',
+        required: true
+      },
+      {
+        key: 'satisfaction',
+        type: 'range',
+        label: 'Nivel de Satisfacción',
+        min: 0,
+        max: 10,
+        step: 1
+      },
+      {
+        key: 'acceptPolicy',
         type: 'toggle', // O 'checkbox' si tienes ambos y quieres un toggle aquí
-        label: 'Estatus',
-       },
-          {
-        key: 'Precio',
-        type: 'toggle', // O 'checkbox' si tienes ambos y quieres un toggle aquí
-        label: 'Precio',
-       }
+        label: 'Acepto la política de privacidad',
+        required: true // Para toggle, esto usualmente significa que debe ser true
+      },
+      {
+        key: 'themeColor',
+        type: 'color',
+        label: 'Color del Tema Preferido'
+      },
+      {
+        key: 'profilePicture',
+        type: 'image', // Para SingleImageUploadComponent
+        label: 'Foto de Perfil'
+      },
+      {
+        key: 'projectFiles',
+        type: 'multipleFileDragGeneric', // Para GenericFileUploadComponent
+        label: 'Adjuntar Archivos del Proyecto'
+      },
+      {
+        key: 'galleryImages',
+        type: 'multipleImageDrag', // Para ImageUploadComponent
+        label: 'Subir Imágenes a la Galería'
+      }
       // ... puedes añadir más configuraciones de campos aquí
     ];
   }
@@ -145,7 +176,6 @@ export class AdminMainApiv1FormComponent implements OnInit {
   }
 
   onActualFormSubmit(): void {
-
     if (this.myForm.valid) {
       console.log('Formulario Principal Enviado:', this.myForm.value);
       // Aquí procesarías los datos del formulario

@@ -1,5 +1,9 @@
 <div *ngIf="element && control" [ngSwitch]="element.type" class="w-full form-input-wrapper">
-
+  <div *ngSwitchCase="'radio'">
+    <app-radio-button-group
+      [config]="element" [options]="element.options || []" [control]="controlAsFormControl"
+    ></app-radio-button-group>
+  </div>
   <div *ngSwitchCase="'text'">
     <app-text-input
       [config]="element" [control]="controlAsFormControl"
@@ -43,6 +47,7 @@
         [config]="element" [control]="controlAsFormControl"
     ></app-checkbox-input>
   </div>
+
 
   <div *ngSwitchCase="'toggle'">
       <app-toggle-switch

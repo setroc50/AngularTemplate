@@ -21,7 +21,11 @@
   { "type":"field", "separateWords": true , "name": "PRECIO", "label": "PRECIO", "field": "Precio", "align": "left"},
   { "type":"field", "separateWords": true , "name": "STATUS", "label": "STATUS", "field": "Estatus", "align": "left"},
   { "type":"field", "separateWords": true ,"name": "CREADO", "label": "CREADO", "field": "Creado", "align": "left"},
-  { "type":"field", "separateWords": true , "name": "ULTIMO CCESO", "label": "ULTIMO ACCESO", "field": "UltimoAcceso", "align": "left"}
+  { "type":"field", "separateWords": true , "name": "ULTIMO CCESO", "label": "ULTIMO ACCESO", "field": "UltimoAcceso", "align": "left"},
+  { "type":"test", "separateWords": false , "name": "ACTIONS", "label": "ACTIONS", "field": "actions", "align": "left"}
+
+
+
       ],
       "single":false,
       "identifier":"id",

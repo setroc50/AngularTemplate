@@ -1,297 +1,108 @@
-<div class="form-input-manager-showcase p-4 md:p-6 mx-auto">
-  <h1 class="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-100">
-    Escaparate de Componentes de Input Personalizados
-  </h1>
+<div *ngIf="element && control" [ngSwitch]="element.type" class="w-full form-input-wrapper">
 
-  <form [formGroup]="showcaseForm" (ngSubmit)="onSubmitShowcase()" novalidate>
+  <div *ngSwitchCase="'text'">
+    <app-text-input
+      [config]="element" [control]="controlAsFormControl"
+      [formGroup]="parentFormGroup"
+    ></app-text-input>
+  </div>
 
+  <div *ngSwitchCase="'email'">
+    <app-text-input
+      [config]="element" [control]="controlAsFormControl"
+      [formGroup]="parentFormGroup"
+    ></app-text-input>
+  </div>
 
-<section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForCheckbox.label }}
-      </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForCheckbox.key) as checkboxCtrl">
-        <app-checkbox-input
-          [config]="configForCheckbox"
-          [control]="checkboxCtrl"
-        ></app-checkbox-input>
-      </ng-container>
-      <div *ngIf="getControlAsFormControl(configForCheckbox.key) as fc">
-        <div *ngIf="fc.invalid && (fc.touched || fc.dirty)" class="text-red-500 dark:text-red-400 text-xs italic mt-2">
-          <p *ngIf="fc.errors?.['requiredTrue']">Debes marcar esta opción.</p>
-        </div>
-      </div>
-    </section>
+  <div *ngSwitchCase="'number'">
+    <app-text-input
+      [config]="element" [control]="controlAsFormControl"
+      [formGroup]="parentFormGroup"
+    ></app-text-input>
+  </div>
 
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForMultiCheckbox.label }}
-      </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForMultiCheckbox.key) as multiCheckboxCtrl">
-        <app-multiple-checkbox
-          [config]="configForMultiCheckbox"
-          [options]="optionsForMultiCheckbox"
-          [control]="multiCheckboxCtrl"
-        ></app-multiple-checkbox>
-      </ng-container>
-      <div *ngIf="getControlAsFormControl(configForMultiCheckbox.key) as fc">
-        <div *ngIf="fc.invalid && (fc.touched || fc.dirty)" class="text-red-500 dark:text-red-400 text-xs italic mt-2">
-          <p *ngIf="fc.errors?.['required'] && fc.value?.length === 0">Debes seleccionar al menos una opción.</p>
-        </div>
-      </div>
-    </section>
+  <div *ngSwitchCase="'textarea'">
+    <app-textarea-input
+      [config]="element" [control]="controlAsFormControl"
+    ></app-textarea-input>
+  </div>
 
-
-
-
-
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      TEST
-  <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-    {{ configForSelectDirect.label }}
-  </h2>
-  <ng-container *ngIf="getControlAsFormControl(configForSelectDirect.key) as selectCtrlDirect">
+  <div *ngSwitchCase="'select'">
     <app-select-input
-      [config]="configForSelectDirect"
-      [options]="optionsForSelectDirect"
-      [control]="selectCtrlDirect"
+      [config]="element" [options]="element.options || []"
+      [control]="controlAsFormControl"
     ></app-select-input>
-  </ng-container>
-</section>
+  </div>
 
-<section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-  <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-    {{ configForSelectResource.label }}
-  </h2>
-  <ng-container *ngIf="getControlAsFormControl(configForSelectResource.key) as selectCtrlResource">
-    <app-select-input
-      [config]="configForSelectResource"
-      [options]="optionsForSelectResource" [control]="selectCtrlResource"
-    ></app-select-input>
-  </ng-container>
-</section>
+  <div *ngSwitchCase="'MultipleCheckbox'"> <app-multiple-checkbox
+      [config]="element" [options]="element.options || []"
+      [control]="controlAsFormControl" ></app-multiple-checkbox>
+  </div>
 
+  <div *ngSwitchCase="'checkbox'"> <app-checkbox-input
+        [config]="element" [control]="controlAsFormControl"
+    ></app-checkbox-input>
+  </div>
 
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForGenericUpload.label }}
-      </h2>
-      <ng-container *ngIf="getControlAsFormArray(configForGenericUpload.key) as genericFilesArray">
-        <app-generic-file-upload
-          [config]="configForGenericUpload"
-          [formArrayControl]="genericFilesArray"
-        ></app-generic-file-upload>
-      </ng-container>
-      <div *ngIf="getControlAsFormArray(configForGenericUpload.key) as fa">
-        <div *ngIf="fa.invalid && (fa.touched || fa.dirty)" class="text-red-500 dark:text-red-400 text-xs italic mt-2">
-          <p *ngIf="fa.errors">Hay problemas con la carga de archivos genéricos.</p>
-        </div>
-      </div>
-    </section>
+  <div *ngSwitchCase="'toggle'">
+      <app-toggle-switch
+          [config]="element" [control]="controlAsFormControl"
+      ></app-toggle-switch>
+  </div>
 
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForMultiImageUpload.label }}
-      </h2>
-      <ng-container *ngIf="getControlAsFormArray(configForMultiImageUpload.key) as multiImageFilesArray">
-        <app-image-upload
-          [config]="configForMultiImageUpload"
-          [formArrayControl]="multiImageFilesArray"
-        ></app-image-upload>
-      </ng-container>
-      <div *ngIf="getControlAsFormArray(configForMultiImageUpload.key) as fa">
-        <div *ngIf="fa.invalid && (fa.touched || fa.dirty)" class="text-red-500 dark:text-red-400 text-xs italic mt-2">
-          <p *ngIf="fa.errors">Hay problemas con la carga de imágenes múltiples.</p>
-        </div>
-      </div>
-    </section>
+  <div *ngSwitchCase="'range'">
+      <app-range-slider
+          [config]="element" [control]="controlAsFormControl"
+      ></app-range-slider>
+  </div>
 
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForSingleImage.label }}
-      </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForSingleImage.key) as singleImageCtrl">
-        <app-single-image-upload
-          [config]="configForSingleImage"
-          [control]="singleImageCtrl"
-        ></app-single-image-upload>
-      </ng-container>
-      <div *ngIf="getControlAsFormControl(configForSingleImage.key) as fc">
-        <div *ngIf="fc.invalid && (fc.touched || fc.dirty)" class="text-red-500 dark:text-red-400 text-xs italic mt-2">
-          <p *ngIf="fc.errors?.['required']">La imagen es requerida.</p>
-        </div>
-      </div>
-    </section>
+  <div *ngSwitchCase="'color'">
+      <app-color-picker
+          [config]="element" [control]="controlAsFormControl"
+      ></app-color-picker>
+  </div>
 
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForRadioDirect.label }}
-      </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForRadioDirect.key) as radioCtrlDirect">
-        <app-radio-button-group
-          [config]="configForRadioDirect"
-          [options]="optionsForRadioDirect"
-          [control]="radioCtrlDirect"
-        ></app-radio-button-group>
-      </ng-container>
-    </section>
+  <div *ngSwitchCase="'date'">
+      <app-date-input
+          [config]="element" [control]="controlAsFormControl"
+      ></app-date-input>
+  </div>
 
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForRadioResource.label }}
-      </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForRadioResource.key) as radioCtrlResource">
-        <app-radio-button-group
-          [config]="configForRadioResource"
-          [options]="optionsForRadioResource"
-          [control]="radioCtrlResource"
-        ></app-radio-button-group>
-      </ng-container>
-    </section>
+  <div *ngSwitchCase="'image'"> <app-single-image-upload
+          [config]="element" [control]="controlAsFormControl"
+      ></app-single-image-upload>
+  </div>
 
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForColorPicker.label }}
-      </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForColorPicker.key) as colorCtrl">
-        <app-color-picker
-          [config]="configForColorPicker"
-          [control]="colorCtrl"
-        ></app-color-picker>
-      </ng-container>
-      <div *ngIf="getControlAsFormControl(configForColorPicker.key) as fc">
-        <div *ngIf="fc.invalid && (fc.touched || fc.dirty)" class="text-red-500 dark:text-red-400 text-xs italic mt-2">
-          <p *ngIf="fc.errors?.['required']">Es necesario seleccionar un color.</p>
-        </div>
-      </div>
-    </section>
+  <div *ngSwitchCase="'multipleFileDragGeneric'">
+      <app-generic-file-upload
+          [config]="element" [formArrayControl]="controlAsFormArray" ></app-generic-file-upload>
+  </div>
 
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForToggleSwitch.label }} </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForToggleSwitch.key) as toggleCtrl">
-        <app-toggle-switch
-          [config]="configForToggleSwitch"
-          [control]="toggleCtrl"
-        ></app-toggle-switch>
-      </ng-container>
-    </section>
+  <div *ngSwitchCase="'multipleImageDrag'">
+      <app-image-upload
+          [config]="element" [formArrayControl]="controlAsFormArray" ></app-image-upload>
+  </div>
 
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForRangeSlider.label }} </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForRangeSlider.key) as rangeCtrl">
-        <app-range-slider
-          [config]="configForRangeSlider"
-          [control]="rangeCtrl"
-        ></app-range-slider>
-      </ng-container>
-    </section>
+  <div *ngSwitchCase="'label'">
+    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 py-2">
+      {{ element.label }}
+    </label>
+  </div>
 
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForDateInput.label }} </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForDateInput.key) as dateCtrl">
-        <app-date-input
-          [config]="configForDateInput"
-          [control]="dateCtrl"
-        ></app-date-input>
-      </ng-container>
-    </section>
-
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForConditionalText.label }} (Dependiente de "{{ configForTextEnabler.label }}")
-      </h2>
-      <div class="mb-4">
-        <label [for]="configForTextEnabler.key" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-          {{ configForTextEnabler.label }}
-        </label>
-        <select [id]="configForTextEnabler.key" [formControlName]="configForTextEnabler.key"
-          class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-          <option value="enable">Permitir Edición del Siguiente Campo</option>
-          <option value="disable">Bloquear Edición del Siguiente Campo</option>
-        </select>
-      </div>
-      <ng-container *ngIf="getControlAsFormControl(configForConditionalText.key) as textInputCtrl">
-        <app-text-input
-          [config]="configForConditionalText"
-          [control]="textInputCtrl"
-          [formGroup]="showcaseForm"
-        ></app-text-input>
-      </ng-container>
-    </section>
-
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForEmailInput.label }}
-      </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForEmailInput.key) as emailCtrl">
-        <app-text-input
-          [config]="configForEmailInput"
-          [control]="emailCtrl"
-          [formGroup]="showcaseForm"
-        ></app-text-input>
-      </ng-container>
-    </section>
-
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForNumberInput.label }}
-      </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForNumberInput.key) as numberCtrl">
-        <app-text-input
-          [config]="configForNumberInput"
-          [control]="numberCtrl"
-          [formGroup]="showcaseForm"
-        ></app-text-input>
-      </ng-container>
-    </section>
-
-    <section class="mb-10 p-6 bg-white dark:bg-gray-800 shadow-xl rounded-lg">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b pb-2 border-gray-300 dark:border-gray-700">
-        {{ configForTextarea.label }}
-      </h2>
-      <ng-container *ngIf="getControlAsFormControl(configForTextarea.key) as textareaCtrl">
-        <app-textarea-input
-          [config]="configForTextarea"
-          [control]="textareaCtrl"
-        ></app-textarea-input>
-      </ng-container>
-    </section>
-
-    <div class="flex items-center justify-center mt-10">
-      <button
-        type="submit"
-        class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg focus:outline-none focus:shadow-outline text-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
-        [disabled]="showcaseForm.invalid && (showcaseForm.touched || showcaseForm.dirty)"
-      >
-        Probar Formulario de Muestra
-      </button>
-    </div>
-  </form>
-
-  <div class="mt-12 p-6 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-inner">
-    <h3 class="font-semibold text-gray-700 dark:text-gray-200 mb-3 text-lg">Estado del Formulario de Muestra (Debug):</h3>
-    <div>
-      <strong class="text-gray-600 dark:text-gray-400">Válido: </strong>
-      <span [ngClass]="showcaseForm.valid ? 'text-green-600 dark:text-green-400 font-semibold' : 'text-red-600 dark:text-red-400 font-semibold'">
-        {{ showcaseForm.valid }}
+  <div *ngSwitchCase="'separator'">
+    <div class="relative flex items-center justify-center w-full my-4">
+      <div class="border-b border-gray-300 dark:border-gray-600 w-full absolute top-1/2 transform -translate-y-1/2"></div>
+      <span *ngIf="element.label" class="px-3 text-sm text-gray-500 dark:text-gray-400 relative bg-white dark:bg-gray-800 rounded-full">
+        {{ element.label }}
       </span>
+      <hr *ngIf="!element.label" class="w-full border-gray-300 dark:border-gray-600"/>
     </div>
-    <div class="mt-3">
-      <strong class="text-gray-600 dark:text-gray-400">Valores del Formulario:</strong>
-      <pre class="text-xs text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-800 p-3 rounded mt-1 whitespace-pre-wrap shadow">{{ showcaseForm.value | json }}</pre>
-    </div>
-    <div class="mt-3" *ngIf="!showcaseForm.valid && (showcaseForm.touched || showcaseForm.dirty)">
-        <strong class="text-gray-600 dark:text-gray-400">Errores del Formulario (por control):</strong>
-        <ul class="text-xs text-red-500 dark:text-red-400 list-disc list-inside mt-1">
-            <li *ngFor="let key of objectKeys(showcaseForm.controls)">
-                <ng-container *ngIf="showcaseForm.controls[key].errors">
-                    <strong>{{ key }}:</strong> {{ showcaseForm.controls[key].errors | json }}
-                </ng-container>
-            </li>
-        </ul>
-    </div>
+  </div>
+
+
+  <div *ngSwitchDefault>
+    <p class="text-sm text-red-600 dark:text-red-400 p-2 bg-red-50 dark:bg-red-900_ rounded">
+      Error: Tipo de input desconocido: **'{{ element.type }}'** para la clave **'{{ element.key }}'**.
+    </p>
   </div>
 </div>

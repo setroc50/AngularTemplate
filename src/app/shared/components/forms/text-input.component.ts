@@ -1,3 +1,5 @@
+// En text-input.component.ts
+
 import { Component, Input, forwardRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, ReactiveFormsModule, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -7,9 +9,9 @@ export interface TextInputElementConfig {
   key: string;
   label?: string;
   placeholder?: string;
-  type?: 'text' | 'email' | 'password' | 'tel' | 'url' | 'number'; // <--- AÑADIDO 'number' AQUÍ
-  disabledField?: string; // Clave del campo en el FormGroup que controla el estado readonly
-  disabledValue?: any;    // Valor que debe tener el campo 'disabledField' para que este input sea editable
+  type?: string; // <--- CAMBIADO AQUÍ a 'string' (antes era una unión de tipos específicos)
+  disabledField?: string;
+  disabledValue?: any;
 }
 
 @Component({
@@ -26,8 +28,7 @@ export interface TextInputElementConfig {
         {{ config.label }}
       </label>
       <input
-        [type]="config.type || 'text'"
-        [id]="config.key"
+        [type]="safeInputType" [id]="config.key"
         [formControl]="control"
         [placeholder]="config.placeholder || config.label || ''"
         [readOnly]="isReadOnly"
@@ -41,12 +42,10 @@ export interface TextInputElementConfig {
         <div *ngIf="control?.errors?.['minlength']">Debe tener al menos {{ control.errors?.['minlength']?.requiredLength }} caracteres.</div>
         <div *ngIf="control?.errors?.['maxlength']">No debe exceder {{ control.errors?.['maxlength']?.requiredLength }} caracteres.</div>
         <div *ngIf="control?.errors?.['pattern']">El formato no es válido.</div>
-        </div>
+      </div>
     </div>
   `,
-  styles: [`
-    /* :host { display: block; } */
-  `],
+  styles: [],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -58,20 +57,10 @@ export interface TextInputElementConfig {
 export class TextInputComponent implements ControlValueAccessor, OnInit {
   @Input() config!: TextInputElementConfig;
   @Input() control!: FormControl;
-  @Input() formGroup!: FormGroup; // Referencia al FormGroup padre
+  @Input() formGroup!: FormGroup;
 
-  // --- Implementación de ControlValueAccessor ---
   onChange: any = (_: string | null) => {};
   onTouched: any = () => {};
-
-  writeValue(value: any): void {}
-  registerOnChange(fn: any): void { this.onChange = fn; }
-  registerOnTouched(fn: any): void { this.onTouched = fn; }
-  setDisabledState?(isDisabled: boolean): void {
-    // El estado 'disabled' del FormControl se propaga.
-    // Para 'readonly', usamos nuestra lógica personalizada.
-  }
-  // --- Fin de ControlValueAccessor ---
 
   constructor() {}
 
@@ -82,21 +71,34 @@ export class TextInputComponent implements ControlValueAccessor, OnInit {
     if (!this.config || !this.config.key) {
         console.error('TextInputComponent: La propiedad "key" en la configuración es obligatoria.', this.config);
     }
-    // Si `disabledField` existe, es buena idea suscribirse a sus cambios si el `formGroup` se pasa
-    // y puede cambiar dinámicamente, para forzar la reevaluación de `isReadOnly`.
-    // Sin embargo, la reevaluación en la plantilla durante el ciclo de detección de cambios
-    // a menudo es suficiente si el `formGroup` y sus valores se actualizan correctamente.
   }
+
+  writeValue(value: any): void {}
+  registerOnChange(fn: any): void { this.onChange = fn; }
+  registerOnTouched(fn: any): void { this.onTouched = fn; }
+  setDisabledState?(isDisabled: boolean): void {}
 
   get isReadOnly(): boolean {
     if (this.config.disabledField && this.config.disabledValue !== undefined && this.formGroup) {
       const controllingField = this.formGroup.get(this.config.disabledField);
       if (controllingField) {
-        // El input es editable si el valor del campo de control ES IGUAL al disabledValue.
-        // Por lo tanto, es readOnly si NO SON IGUALES.
         return controllingField.value != this.config.disabledValue;
       }
     }
-    return false; // Por defecto, no es readonly si no se cumple la condición o no hay config para ello.
+    return false;
+  }
+
+  /**
+   * Devuelve un tipo de input HTML seguro. Si el tipo en config no es uno
+   * de los soportados para input de texto, devuelve 'text' por defecto.
+   */
+  get safeInputType(): string {
+    const defaultType = 'text';
+    if (!this.config || !this.config.type) {
+      return defaultType;
+    }
+    const supportedTypes = ['text', 'email', 'password', 'tel', 'url', 'number'];
+    const lowerType = this.config.type.toLowerCase();
+    return supportedTypes.includes(lowerType) ? lowerType : defaultType;
   }
 }

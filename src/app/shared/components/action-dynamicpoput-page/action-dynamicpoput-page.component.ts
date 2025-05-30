@@ -2,19 +2,20 @@
 import { Component, OnInit, OnDestroy, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
- import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import {getConfig } from '../../../JSON/jsonConfigs';
 
 
 import { DynamicFormSecondarypageComponent } from '../dynamic-form-secondpage/dynamic-form-secondpage.component';
 import { FormInputManagerComponent } from '../forms/form-input-manager/form-input-manager.component';
+import { AdminMainApiv1FormComponent } from '../../../pages/admin-main-apiv1-form/admin-main-apiv1-form.component';
 
 
 
 @Component({
   selector: 'app-dynamicpoput-page',
   standalone: true,
-  imports: [CommonModule, DynamicFormSecondarypageComponent,FormInputManagerComponent ],
+  imports: [CommonModule, DynamicFormSecondarypageComponent,FormInputManagerComponent,AdminMainApiv1FormComponent ],
   templateUrl: './action-dynamicpoput-page.component.html',
 
 })

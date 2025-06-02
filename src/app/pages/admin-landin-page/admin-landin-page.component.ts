@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TableComponent } from '../../shared/components/table/table.component';
+import { TableComponent } from '../../shared/components/layout/table/table.component';
  import * as createFormConfig from "./formtestTemplate.json"
  import { DynamicFormComponent } from '../../shared/components/dynamic-form/dynamic-form.component'; // Asegúrate de la ruta correcta
 import { CommonModule, JsonPipe } from '@angular/common';

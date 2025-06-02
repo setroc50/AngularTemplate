@@ -1,0 +1,309 @@
+<div>
+
+  <div>
+    <div
+      class="bg-white dark:bg-slate-800 rounded-lg shadow-xl overflow-hidden"
+    >
+      <div
+        class="max-h-[calc(87vh-4rem)] min-h-[450px] overflow-y-auto relative flex flex-col"
+      >
+        <table
+          class="min-w-full border-separate flex-grow"
+          style="border-spacing: 0"
+        >
+          <thead class="sticky top-0 z-10">
+            <tr>
+              <th colspan="100" class="p-0">
+                <div
+                  class="bg-slate-50 dark:bg-slate-700/80 px-4 sm:px-6 lg:px-8 relative flex flex-wrap items-center justify-between gap-4 py-3 border-b border-slate-200 dark:border-slate-700"
+                >
+                  <div class="flex shrink-0 items-center">
+                    <h2
+                      class="text-lg font-semibold text-slate-800 dark:text-slate-100"
+                    >
+                      {{ name }}
+                    </h2>
+                  </div>
+
+                  <div
+                    class="min-w-0 flex-1 order-last sm:order-none w-full sm:w-auto sm:max-w-xs md:max-w-sm"
+                  >
+                    <div class="relative">
+                      <div
+                        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
+                      >
+                        <svg
+                          class="h-5 w-5 text-slate-400 dark:text-slate-500"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <input
+                        type="search"
+                        name="search"
+                        [(ngModel)]="searchQuery"
+                        (input)="applyFilter()"
+                        class="block w-full rounded-md py-1.5 pl-10 pr-3 text-slate-900 dark:text-slate-200 bg-white dark:bg-slate-800/50 border border-slate-300 dark:border-slate-600 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary focus:border-primary dark:focus:border-primary sm:text-sm"
+                        placeholder="Buscar..."
+                        [disabled]="
+                          paginatedData === undefined || paginatedData === null
+                        "
+                      />
+                    </div>
+                  </div>
+
+                  <div class="flex items-center">
+
+
+
+
+
+
+                    <div *ngFor="let headerTool of headerTools">
+                      <div *ngIf="headerTool.type === 'form'">
+
+
+<app-dynamic-page-components-poput
+[formConfig]="form"
+[endpointRoute]="headerTool.endpint"
+[operation]="headerTool.operation"   >
+</app-dynamic-page-components-poput>
+
+
+                      </div>
+                     </div>
+
+
+
+
+
+
+
+  </div>
+                </div>
+              </th>
+            </tr>
+            <tr
+              class="sticky top-[calc(4rem+1px)] sm:top-[calc(3.5rem+1px)] z-10"
+            >
+              <th
+                class="px-4 py-3.5 text-left text-sm font-semibold bg-slate-100/90 dark:bg-slate-700/90 text-slate-900 dark:text-slate-200 border-b border-slate-300 dark:border-slate-600 sm:pl-6 lg:pl-8"
+              >
+                <label class="relative flex items-center">
+                  <input
+                    *ngIf="!single"
+                    type="checkbox"
+                    class="peer appearance-none h-4 w-4 rounded-sm border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-900 checked:bg-primary dark:checked:bg-primary checked:border-transparent focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary dark:focus:ring-primary"
+                    [checked]="selectAll"
+                    (change)="toggleSelectAll()"
+                    [disabled]="
+                      single ||
+                      paginatedData === undefined ||
+                      paginatedData === null ||
+                      paginatedData.length === 0
+                    "
+                  />
+                  <svg
+                    class="pointer-events-none absolute left-0 top-0 h-4 w-4 text-white opacity-0 peer-checked:opacity-100"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </label>
+              </th>
+              <th
+                *ngFor="let col of columns"
+                class="px-3 py-3.5 text-center text-sm font-semibold bg-slate-100/90 dark:bg-slate-700/90 text-slate-900 dark:text-slate-200 border-b border-slate-300 dark:border-slate-600 hidden sm:table-cell"
+              >
+                {{ col.label }}
+              </th>
+            </tr>
+          </thead>
+
+          <ng-container
+            *ngIf="
+              paginatedData === undefined || paginatedData === null;
+              else dataProcessed
+            "
+          >
+            <tbody>
+              <tr>
+                <td
+                  [attr.colspan]="(columns ? columns.length : 0) + 1"
+                  class="text-center py-20 px-6"
+                >
+                  <div
+                    class="flex flex-col justify-center items-center h-full space-y-3"
+                  >
+                    <svg
+                      class="animate-spin h-8 w-8 text-primary dark:text-primary"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4"
+                      ></circle>
+                      <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    <span class="text-slate-500 dark:text-slate-400 text-sm"
+                      >Cargando datos...</span
+                    >
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </ng-container>
+
+          <ng-template #dataProcessed>
+            <tbody
+              *ngIf="paginatedData.length > 0; else noDataFound"
+              class="divide-y divide-slate-200 dark:divide-slate-700 bg-white dark:bg-slate-800"
+            >
+              <tr
+                *ngFor="let row of paginatedData"
+                class="text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors duration-150"
+              >
+                <td
+                  class="whitespace-nowrap py-2.5 pl-4 pr-3 text-sm font-medium sm:pl-6 lg:pl-8"
+                >
+                  <label class="relative flex items-center">
+                    <input
+                      type="checkbox"
+                      class="peer appearance-none h-4 w-4 rounded-sm border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-900 checked:bg-primary dark:checked:bg-primary checked:border-transparent focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary dark:focus:ring-primary"
+                      [checked]="selectedItems.includes(row)"
+                      (change)="toggleItemSelection(row)"
+                    />
+                    <svg
+                      class="pointer-events-none absolute left-0 top-0 h-4 w-4 text-white opacity-0 peer-checked:opacity-100"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </label>
+                </td>
+                <td
+                  *ngFor="let col of columns"
+                  class="px-3 py-2.5 text-sm hidden sm:table-cell"
+                >
+                  <div
+                    [ngClass]="{
+                      'max-w-[200px] md:max-w-[300px] break-words whitespace-normal text-left':
+                        col.separateWords,
+                      'text-center whitespace-nowrap': !col.separateWords
+                    }"
+                  >
+                    <ng-container
+                      *ngIf="col.field === 'actions'; else displayField"
+                    >
+                      <div class="flex flex-row items-center space-x-2">
+
+
+                     <div *ngFor="let innerTool of innerTools">
+                      <div *ngIf="innerTool.type === 'form'">
+
+
+<app-dynamic-page-components-poput [formConfig]="form" [rowData]="row" [endpointRoute]="innerTool.endpint"   [operation]="innerTool.operation"   ></app-dynamic-page-components-poput>
+
+                      </div>
+                     </div>
+
+                        <ng-container
+                          *ngTemplateOutlet="
+                            rowTemplate;
+                            context: {
+                              $implicit: row,
+                              identifier: row[identifier]
+                            }
+                          "
+                        ></ng-container>
+                      </div>
+                    </ng-container>
+                    <ng-template #displayField>
+                      {{ row[col.field] || "-" }}
+                    </ng-template>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <ng-template #noDataFound>
+              <tbody>
+                <tr>
+                  <td
+                    [attr.colspan]="(columns ? columns.length : 0) + 1"
+                    class="px-6 py-12 text-center text-sm text-slate-500 dark:text-slate-400"
+                  >
+                    No se encontraron resultados.
+                  </td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </ng-template>
+          <tfoot
+            class="sticky bottom-0 bg-slate-50 dark:bg-slate-700/80 border-t border-slate-200 dark:border-slate-700"
+          >
+            <tr>
+              <td [attr.colspan]="(columns ? columns.length : 0) + 1">
+                <div
+                  class="flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8"
+                >
+                  <button
+                    (click)="changePage(currentPage - 1)"
+                    [disabled]="
+                      currentPage === 1 ||
+                      paginatedData === undefined ||
+                      paginatedData === null
+                    "
+                    class="rounded-md bg-white dark:bg-slate-600 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-500 hover:bg-slate-50 dark:hover:bg-slate-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Anterior
+                  </button>
+                  <span class="text-sm text-slate-700 dark:text-slate-300">
+                    Página {{ currentPage }} de {{ totalPages }}
+                  </span>
+                  <button
+                    (click)="changePage(currentPage + 1)"
+                    [disabled]="
+                      currentPage === totalPages ||
+                      paginatedData === undefined ||
+                      paginatedData === null
+                    "
+                    class="rounded-md bg-white dark:bg-slate-600 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-500 hover:bg-slate-50 dark:hover:bg-slate-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Siguiente
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

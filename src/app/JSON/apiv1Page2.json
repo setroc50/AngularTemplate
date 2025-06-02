@@ -1,0 +1,488 @@
+[
+  {
+    "nameModel": "Uno De todo",
+    "route": "uno-de-todo",
+    "icon": "fa plus",
+    "main": [
+      {
+        "pageTitle": "Administración de Plataformas Digitales",
+        "layoutType": "tabsContainer",
+        "tabs": [
+          {
+            "tabTitle": "APIv1 MX",
+            "tabKey": "apiV1Tab1",
+            "isActive": true,
+            "icon": "api",
+            "fields": [
+              {
+                "type": "table",
+                "layoutGroup": "digitalplatforms",
+                "layoutName": "apiv1Form",
+                "label": "Api V1 MX",
+                "key": "apiv1MxTable",
+                "colZize": "12",
+                "style": "",
+                "icon": "APIV1",
+                "single": false,
+                "identifier": "id",
+                "headerTools": [
+                  {"type":"form","operation":"create","endpint":""},
+          {"type":"action","action":"ExportPDF"},
+                  {"type":"action","operation":"ExportCSV"}
+                ],
+                "innerTools": [
+                  {"type":"form","operation":"edit","endpint":""},
+                  {"type":"form","operation":"delete","endpint":""},
+                  {"type":"action","operation":"Send","endpint":""}
+                ],
+                "data": [],
+                "columns": [
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "DSCODE",
+                    "label": "DSCODE",
+                    "field": "CodigoDistribuidor",
+                    "align": "center"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": false,
+                    "name": "CONTRASEÑA",
+                    "label": "CONTRASEÑA",
+                    "field": "Contrasena",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": false,
+                    "name": "CORREO",
+                    "label": "CORREO",
+                    "field": "Correo",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "PAIS",
+                    "label": "PAIS",
+                    "field": "Pais",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "PLANTA",
+                    "label": "PLANTA",
+                    "field": "Planta",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "PRECIO",
+                    "label": "PRECIO",
+                    "field": "Precio",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "STATUS",
+                    "label": "STATUS",
+                    "field": "Estatus",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "CREADO",
+                    "label": "CREADO",
+                    "field": "Creado",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "ULTIMO ACCESO",
+                    "label": "ULTIMO ACCESO",
+                    "field": "UltimoAcceso",
+                    "align": "left"
+                  },
+                  {
+                    "type": "test",
+                    "separateWords": false,
+                    "name": "ACTIONS",
+                    "label": "ACTIONS",
+                    "field": "actions",
+                    "align": "left"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tabTitle": "APIv1 COL",
+            "tabKey": "apiV1Tab2",
+            "isActive": true,
+            "icon": "api",
+            "fields": [
+              {
+                "layoutGroup": "digitalplatforms",
+                "layoutName": "apiv1Form",
+                "label": "Api V1 COL",
+                "key": "apiv1ColTable",
+                "colZize": "12",
+                "type": "table",
+                "style": "",
+                "icon": "APIV1",
+                "single": false,
+                "identifier": "id",
+                "headertools": [
+                  "Create",
+                  "ExportPDF",
+                  "ExportCSV"
+                ],
+                "innerTools": [
+                  "Edit",
+                  "Delete"
+                ],
+                "data": [],
+                "columns": [
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "DSCODE",
+                    "label": "DSCODE",
+                    "field": "CodigoDistribuidor",
+                    "align": "center"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": false,
+                    "name": "CONTRASEÑA",
+                    "label": "CONTRASEÑA",
+                    "field": "Contrasena",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": false,
+                    "name": "CORREO",
+                    "label": "CORREO",
+                    "field": "Correo",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "PAIS",
+                    "label": "PAIS",
+                    "field": "Pais",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "PLANTA",
+                    "label": "PLANTA",
+                    "field": "Planta",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "PRECIO",
+                    "label": "PRECIO",
+                    "field": "Precio",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "STATUS",
+                    "label": "STATUS",
+                    "field": "Estatus",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "CREADO",
+                    "label": "CREADO",
+                    "field": "Creado",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "ULTIMO ACCESO",
+                    "label": "ULTIMO ACCESO",
+                    "field": "UltimoAcceso",
+                    "align": "left"
+                  },
+                  {
+                    "type": "test",
+                    "separateWords": false,
+                    "name": "ACTIONS",
+                    "label": "ACTIONS",
+                    "field": "actions",
+                    "align": "left"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tabTitle": "APIv1 GTM",
+            "tabKey": "apiV1Tab3",
+            "isActive": true,
+            "icon": "api",
+            "fields": [
+              {
+                "layoutGroup": "digitalplatforms",
+                "layoutName": "apiv1Form",
+                "label": "Api V1 GTM",
+                "key": "apiv1MxTable",
+                "colZize": "12",
+                "type": "table",
+                "style": "",
+                "icon": "APIV1",
+                "single": false,
+                "identifier": "id",
+                "headertools": [
+                  "Create",
+                  "ExportPDF",
+                  "ExportCSV"
+                ],
+                "innerTools": [
+                  "Edit",
+                  "Delete"
+                ],
+                "data": [],
+                "columns": [
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "DSCODE",
+                    "label": "DSCODE",
+                    "field": "CodigoDistribuidor",
+                    "align": "center"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": false,
+                    "name": "CONTRASEÑA",
+                    "label": "CONTRASEÑA",
+                    "field": "Contrasena",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": false,
+                    "name": "CORREO",
+                    "label": "CORREO",
+                    "field": "Correo",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "PAIS",
+                    "label": "PAIS",
+                    "field": "Pais",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "PLANTA",
+                    "label": "PLANTA",
+                    "field": "Planta",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "PRECIO",
+                    "label": "PRECIO",
+                    "field": "Precio",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "STATUS",
+                    "label": "STATUS",
+                    "field": "Estatus",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "CREADO",
+                    "label": "CREADO",
+                    "field": "Creado",
+                    "align": "left"
+                  },
+                  {
+                    "type": "field",
+                    "separateWords": true,
+                    "name": "ULTIMO ACCESO",
+                    "label": "ULTIMO ACCESO",
+                    "field": "UltimoAcceso",
+                    "align": "left"
+                  },
+                  {
+                    "type": "test",
+                    "separateWords": false,
+                    "name": "ACTIONS",
+                    "label": "ACTIONS",
+                    "field": "actions",
+                    "align": "left"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "form":
+    [
+      {
+        "key": "Pais",
+        "type": "radio",
+        "label": "Pais",
+        "required": true,
+        "options": [
+          {
+            "value": "MX",
+            "name": "MX"
+          },
+          {
+            "value": "COL",
+            "name": "COL"
+          },
+          {
+            "value": "GTM",
+            "name": "GTM"
+          }
+        ]
+      },
+      {
+        "key": "CodigoDistribuidor",
+        "type": "text",
+        "label": "Codigo DS",
+        "placeholder": "Codigo",
+        "required": true
+      },
+      {
+        "key": "Contrasena",
+        "type": "text",
+        "label": "Contraseña",
+        "placeholder": "Contraseña",
+        "required": true
+      },
+      {
+        "key": "Correo",
+        "type": "email",
+        "label": "Correo Electrónico",
+        "placeholder": "correoDS@correo.com",
+        "required": true
+      },
+      {
+        "key": "CorreosCopia",
+        "type": "text",
+        "label": "Correos Copia",
+        "placeholder": "Separar por ;"
+      },
+      {
+        "key": "Planta",
+        "type": "MultipleCheckbox",
+        "label": "Almacenes - Stocks",
+        "required": true,
+        "options": [
+          {
+            "value": 1010,
+            "name": "MX-Guadalajara"
+          },
+          {
+            "value": 1011,
+            "name": "MX-Algarín"
+          },
+          {
+            "value": 1012,
+            "name": "MX-Monterrey"
+          },
+          {
+            "value": 1013,
+            "name": "MX-Gustavo Baz"
+          },
+          {
+            "value": 1014,
+            "name": "MX-Torreón"
+          },
+          {
+            "value": 1210,
+            "name": "COL-Colombia"
+          },
+          {
+            "value": 1211,
+            "name": "COL-RIC"
+          },
+          {
+            "value": 1310,
+            "name": "GTM-Guatemala"
+          }
+        ]
+      },
+      {
+        "key": "Estatus",
+        "type": "toggle",
+        "label": "Estatus"
+      },
+      {
+        "key": "Precio",
+        "type": "toggle",
+        "label": "Precio"
+      }
+    ],
+
+
+
+  "fields": [ ],
+  "services": [
+
+    {
+      "create":{  "url": "https://promocionalesenlinea.net/api/listUsers/?Pais=MX",
+          "method": "POST"},
+      "edit":{  "url": "https://promocionalesenlinea.net/api/listUsers/?Pais=MX",
+          "method": "POST"},
+      "delete":{  "url": "https://promocionalesenlinea.net/api/listUsers/?Pais=MX",
+          "method": "POST"},
+
+      "related": [
+        {
+          "key": "apiv1MxTable",
+          "name": "apiv1MxTableService",
+          "url": "https://promocionalesenlinea.net/api/listUsers/?Pais=MX",
+          "method": "GET"
+        },
+        {
+          "key": "apiv1ColTable",
+          "name": "apiv1MxTableService",
+          "url": "https://promocionalesenlinea.net/api/listUsers/?Pais=COL",
+          "method": "GET"
+        },
+        {
+          "key": "apiv1GtmTable",
+          "name": "apiv1MxTableService",
+          "url": "https://promocionalesenlinea.net/api/listUsers/?Pais=GTM",
+          "method": "GET"
+        }
+      ]
+    }
+  ]
+}
+]

@@ -19,7 +19,6 @@ import {
 import { TitleCasePipe, CommonModule } from '@angular/common';
 import { DynamicService } from './../../../services/dynamic-service.service'; // Asegúrate de la ruta correcta
 
-import { MultipleCheckboxComponent } from "../form/multiple-checkbox/multiple-checkbox.component";
 
 interface FormElementConfig {
   colZize?: string;
@@ -48,7 +47,7 @@ interface FormElementConfig {
 @Component({
   selector: 'app-dynamic-form-secondpage',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TitleCasePipe,  MultipleCheckboxComponent],
+  imports: [CommonModule, ReactiveFormsModule, TitleCasePipe,  ],
   templateUrl: './dynamic-form-secondpage.component.html',
   styleUrls: ['./dynamic-form-secondpage.component.css'],
 })

@@ -44,15 +44,17 @@
           <ng-template let-row let-id="identifier">
 
 
-                             <app-dynamicpoput-page [layoutGroup]="'digitalplatforms'" [layoutName]="'apiv1Page'"></app-dynamicpoput-page>
-                             <app-dynamicpoput-page [layoutGroup]="'digitalplatforms'" [layoutName]="'apiv1Page'"></app-dynamicpoput-page>
-                             <app-dynamicpoput-page [layoutGroup]="'digitalplatforms'" [layoutName]="'apiv1Page'"></app-dynamicpoput-page>
+                             <app-dynamicpoput-page [layoutGroup]="'digitalplatforms'" [rowData]="row" [operation]="'edit'" [layoutName]="'apiv1Page'"></app-dynamicpoput-page>
+                             <app-dynamicpoput-page [layoutGroup]="'digitalplatforms'" [rowData]="row" [operation]="'delete'" [layoutName]="'apiv1Page'"></app-dynamicpoput-page>
+
 
           </ng-template>
         </app-table>
-
+<!--
+        REPRESENTA LA TABLA
 {{resources[element.key].selectedItems |json}}
-                </div>
+     -->
+           </div>
 
 
 

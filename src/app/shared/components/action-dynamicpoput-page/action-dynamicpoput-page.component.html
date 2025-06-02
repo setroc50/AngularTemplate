@@ -8,9 +8,9 @@
          bg-gray-600/80 dark:bg-black/70 z-50" (click)="closeForm()" >
   <div
     class="bg-white dark:bg-slate-800 rounded-lg shadow-xl
-           w-11/12 md:w-8/12 lg:w-1/2 xl:max-w-2xl max-h-[90vh] overflow-y-auto py-1       relative" (click)="$event.stopPropagation()" >
+           w-11/12 md:w-8/12 lg:w-1/2 xl:max-w-2xl max-h-[90vh] overflow-y-auto    relative" (click)="$event.stopPropagation()" >
 
-    <app-admin-main-apiv1-form></app-admin-main-apiv1-form>
+    <app-admin-main-apiv1-form [operation]="operation" [initialData]="rowData"></app-admin-main-apiv1-form>
     <!--
     <app-dynamic-form-secondpage [formConfigInput]="formData"></app-dynamic-form-secondpage>
 -->

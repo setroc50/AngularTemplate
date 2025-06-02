@@ -18,9 +18,8 @@ import {
 } from '@angular/forms';
 import { TitleCasePipe, CommonModule } from '@angular/common';
 import { DynamicService } from './../../../services/dynamic-service.service'; // Asegúrate de la ruta correcta
-import { TableComponent } from '../table/table.component';
-import { MultipleCheckboxComponent } from "../form/multiple-checkbox/multiple-checkbox.component";
-import { ActionDynamicpoputComponent } from "../action-dynamicpoput-page/action-dynamicpoput-page.component";
+import { TableComponent } from '../layout/table/table.component';
+ import { ActionDynamicpoputComponent } from "../action-dynamicpoput-page/action-dynamicpoput-page.component";
 
 interface FormElementConfig {
   colZize?: string;
@@ -51,7 +50,7 @@ interface FormElementConfig {
 @Component({
   selector: 'app-dynamic-form-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TitleCasePipe, TableComponent, MultipleCheckboxComponent, ActionDynamicpoputComponent,],
+  imports: [CommonModule, ReactiveFormsModule, TitleCasePipe, TableComponent, ActionDynamicpoputComponent,],
   templateUrl: './dynamic-form-page.component.html',
   styleUrls: ['./dynamic-form-page.component.css'],
 })

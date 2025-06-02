@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
     "@fortawesome/fontawesome-free": "^6.7.2",
+    "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "^4.1.7",
     "daisyui": "^5.0.37",
     "rxjs": "~7.8.0",

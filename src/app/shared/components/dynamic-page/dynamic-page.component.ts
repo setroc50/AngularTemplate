@@ -1,17 +1,16 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
- import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import {getConfig } from '../../../JSON/jsonConfigs';
+import {DynamicPageConstruct} from './components/dynamic-page-construct/dynamic-page-construct.component';
 
-
-import { DynamicFormPageComponent } from '../dynamic-form-page/dynamic-form-page.component'; // Asegúrate de la ruta correcta
 
 
 @Component({
   selector: 'app-dynamic-page',
   standalone: true,
-  imports: [CommonModule,DynamicFormPageComponent],
+  imports: [CommonModule,DynamicPageConstruct],
   templateUrl: './dynamic-page.component.html',
 
  })
@@ -38,7 +37,7 @@ export class DynamicPageComponent  implements OnInit, OnDestroy   {
 if(this.formData == 404)       this.router.navigate(['/landing']);  // 👈 Ya puedes usar el router aquí
 
 
-     });
+});
   }
 
   ngOnDestroy(): void {

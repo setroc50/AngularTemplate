@@ -25,6 +25,7 @@ export class ActionDynamicpoputComponent  implements OnInit, OnDestroy   {
 
     @Input() layoutGroup:string = ''  ;
     @Input() layoutName:string = ''  ;
+     @Input() rowData:[] = []  ;
 
 
 
@@ -54,7 +55,7 @@ export class ActionDynamicpoputComponent  implements OnInit, OnDestroy   {
 
   ngOnInit(): void {
 
-
+      console.log(this.rowData,'Datos en el componente')
 
       this.formGroup = this.layoutGroup; // Obtén el valor del parámetro 'portadillas'
       this.formName =  this.layoutName; // Obtén el valor del parámetro 'portadillas'

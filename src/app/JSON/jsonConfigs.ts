@@ -2,6 +2,7 @@
 import * as portadillasConfig from "./portadillas.json";
 import * as webportadillasConfig from "./webportadillas.json";
 import * as apiv1PageConfig from "./apiv1Page.json";
+import * as apiv1PageConfig2 from "./apiv1Page2.json";
 import * as apiv1FormConfig from "./apiv1Form.json";
 
 export const getConfig = (group: string, page: string) => {
@@ -9,7 +10,8 @@ export const getConfig = (group: string, page: string) => {
     'digitalplatforms_portadillas': (portadillasConfig as any).default,
     'digitalplatforms_webportadillas': (webportadillasConfig as any).default,
     'digitalplatforms_apiv1Page': (apiv1PageConfig as any).default,
-    'digitalplatforms_apiv1Form': (apiv1FormConfig as any).default
+    'digitalplatforms_apiv1Form': (apiv1FormConfig as any).default,
+    'digitalplatforms_apiv1Page2': (apiv1PageConfig2 as any).default
   };
 
   const configKey: string = `${group}_${page}`;
@@ -18,7 +20,7 @@ export const getConfig = (group: string, page: string) => {
   if (config) {
     return config;
   } else {
-       console.error(`No se encontró configuración para: ${configKey}`);
+console.error(`No se encontró configuración para: ${configKey}`);
 
     return 404;
   }

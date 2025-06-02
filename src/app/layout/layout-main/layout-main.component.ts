@@ -5,7 +5,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
- import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
+ import { SidebarComponent } from '../../shared/components/layout/sidebar/sidebar.component';
 import { ThemeToggleComponent } from '../../shared/components/theme-toggle/theme-toggle';
 
 @Component({
